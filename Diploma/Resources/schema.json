@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$ref": "#/definitions/Welcome6",
+  "definitions": {
+    "Welcome6": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "announcement": {
+          "type": "string"
+        },
+        "completed_on": {
+          "type": "integer"
+        },
+        "default_role_id": {
+          "type": "integer"
+        },
+        "default_role": {
+          "type": "string"
+        },
+        "is_completed": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "show_announcement": {
+          "type": "boolean"
+        },
+        "suite_mode": {
+          "type": "integer"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "qt-uri-protocols": [
+            "https"
+          ],
+          "qt-uri-extensions": [
+            ".php"
+          ]
+        },
+        "users": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/User"
+          }
+        },
+        "groups": {
+          "type": "array",
+          "items": {}
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "Welcome6"
+    },
+    "User": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "global_role_id": {
+          "type": "null"
+        },
+        "global_role": {
+          "type": "null"
+        },
+        "project_role_id": {
+          "type": "null"
+        },
+        "project_role": {
+          "type": "null"
+        }
+      },
+      "required": [],
+      "title": "User"
+    }
+  }
+}
