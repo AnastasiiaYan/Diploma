@@ -10,14 +10,14 @@ namespace Diploma.Tests
         public void SuccessfulAuthorizationTest()
         {
             LoginPage loginPage = new LoginPage(Driver);
+            StartPage startPage = new StartPage(Driver); 
+
             var emailText = "aytestqa@gmail.com";
             var passwordText = "qwertyTMS24.";
 
-            Driver.Navigate().GoToUrl("https://qase.io/");            
+           // Driver.Navigate().GoToUrl("https://qase.io/");
 
-            IWebElement mainSigninButton = Driver.FindElement(By.Id("signin"));
-            mainSigninButton.Click();
-
+            startPage.ClickOnStartSignInButton();
             loginPage.SendKeysIntoEmailInputField(emailText);
             loginPage.SendKeysIntoPasswordInputField(passwordText);
             loginPage.ClickOnSignInButton();
