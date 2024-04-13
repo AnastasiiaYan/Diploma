@@ -1,6 +1,5 @@
 ﻿using Diploma.Objects.Pages;
 using Diploma.Tests.UITests;
-using OpenQA.Selenium;
 
 namespace Diploma.Tests
 {
@@ -10,19 +9,18 @@ namespace Diploma.Tests
         public void SuccessfulAuthorizationTest()
         {
             LoginPage loginPage = new LoginPage(Driver);
-            StartPage startPage = new StartPage(Driver); 
+            StartPage startPage = new StartPage(Driver);
+            ProjectsPage projectsPage = new ProjectsPage(Driver);
 
             var emailText = "aytestqa@gmail.com";
             var passwordText = "qwertyTMS24.";
 
-           // Driver.Navigate().GoToUrl("https://qase.io/");
-
-            startPage.ClickOnStartSignInButton();
+            startPage.ClickOnSignInButton();
             loginPage.SendKeysIntoEmailInputField(emailText);
             loginPage.SendKeysIntoPasswordInputField(passwordText);
-            loginPage.ClickOnSignInButton();
+            loginPage.ClickOnSubmitButton();
 
-            Assert.That(IsPageOpened());
+            Assert.That(projectsPage.IsPageOpened());
         }        
     }    
 }

@@ -24,5 +24,7 @@ namespace Diploma.Objects.Pages
         {
             Driver.Navigate().GoToUrl(Configurator.AppSettings.URL);
         }
+
+        public abstract bool IsPageOpened();
     }
 }

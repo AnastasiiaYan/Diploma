@@ -7,13 +7,18 @@ namespace Diploma.Objects.Pages
     {
         public StartPage(IWebDriver driver) : base(driver) { }
 
-        private static readonly By srartSignInButton = By.Id("signin");                
+        private static readonly By signInButton = By.Id("signin");
 
-        public void ClickOnStartSignInButton()
+        public IWebElement SignInButton => WaitsHelper.WaitForExists(signInButton);
+
+        public void ClickOnSignInButton()
         {
-            WaitsHelper
-                .WaitForExists(srartSignInButton)
-                .Click();
+            SignInButton.Click();
+        }
+
+        public override bool IsPageOpened()
+        {
+            return SignInButton.Displayed;
         }
     }
 }

@@ -9,27 +9,30 @@ namespace Diploma.Objects.Pages
 
         private static readonly By emailInputField = By.Name("email");
         private static readonly By passwordInputField = By.Name("password");
-        private static readonly By signInButton = By.CssSelector("button[type= 'submit']");
+        private static readonly By submitButton = By.CssSelector("button[type= 'submit']");
+
+        public IWebElement EmailInputField => WaitsHelper.WaitForExists(emailInputField);
+        public IWebElement PasswordInputField => WaitsHelper.WaitForExists(passwordInputField);
+        public IWebElement SubmitButton => WaitsHelper.WaitForExists(submitButton);
 
         public void SendKeysIntoEmailInputField(string input)
         {
-            WaitsHelper
-                .WaitForExists(emailInputField)
-                .SendKeys(input);
+            EmailInputField.SendKeys(input);
         }
 
         public void SendKeysIntoPasswordInputField(string input)
         {
-            WaitsHelper
-                .WaitForExists(passwordInputField)
-                .SendKeys(input);
+            PasswordInputField.SendKeys(input);
         }
 
-        public void ClickOnSignInButton()
+        public void ClickOnSubmitButton()
         {
-            WaitsHelper
-                .WaitForExists(signInButton)
-                .Click();
+            SubmitButton.Click();
+        }
+
+        public override bool IsPageOpened()
+        {
+            return EmailInputField.Displayed && PasswordInputField.Displayed;
         }
     }
 }
