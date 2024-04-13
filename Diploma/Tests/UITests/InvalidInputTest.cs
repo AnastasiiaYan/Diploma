@@ -1,4 +1,5 @@
-﻿/* 1 тест на использование некорректных данных */
+﻿/* использование некорректных данных */
+
 using OpenQA.Selenium;
 
 namespace Diploma.Tests.UITests
@@ -6,16 +7,16 @@ namespace Diploma.Tests.UITests
     internal class InvalidInputTest : BaseTest
     {
         [Test]
-        public void InvalidInputAuthorizationTest() 
+        public void InvalidInputAuthorizationTest()
         {
             Driver.Navigate().GoToUrl("https://qase.io/"); //ссылка из конфига     
 
             IWebElement mainSigninButton = Driver.FindElement(By.Id("signin"));
             mainSigninButton.Click();
 
-            IWebElement emailInput = Driver.FindElement(By.Name("email"));  
+            IWebElement emailInput = Driver.FindElement(By.Name("email"));
             emailInput.SendKeys("aytestqa@gmail.com");//из конфига
-            IWebElement pswInput = Driver.FindElement(By.Name("password")); 
+            IWebElement pswInput = Driver.FindElement(By.Name("password"));
             pswInput.SendKeys("qwertyTMS."); //из конфига
 
             IWebElement signInButton = Driver.FindElement(By.CssSelector("button[type= 'submit']"));

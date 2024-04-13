@@ -1,5 +1,5 @@
-﻿/* 1 тест на удаление сущности */
-using java.awt;
+﻿/* тест на удаление сущности */
+
 using OpenQA.Selenium;
 
 namespace Diploma.Tests.UITests
@@ -22,7 +22,7 @@ namespace Diploma.Tests.UITests
 
             IWebElement signInButton = Driver.FindElement(By.CssSelector("button[type= 'submit']"));
             signInButton.Click();
-            
+
             //сам тест на удаление сущности             
             Thread.Sleep(4000); //без паузы падает вейтером решится
             //нахожу проект далее можно в метод есть/нет проект
@@ -37,7 +37,7 @@ namespace Diploma.Tests.UITests
             IWebElement DelProjectButton = Driver.FindElement(By.CssSelector("button.G1dmaA.X8bxUI.IAcAWv"));
             DelProjectButton.Click();
 
-            
+
             // Проверяем, что элемент не найден
             try
             {

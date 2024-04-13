@@ -1,4 +1,5 @@
 ﻿/* 1 тест воспроизводящий любой дефект, в данном случае корректное альтернативное поведение при загрузке файла с неожиданной структурой*/
+
 using java.awt;
 using OpenQA.Selenium;
 using System;
@@ -9,7 +10,7 @@ namespace Diploma.Tests.UITests
     internal class ReproductionBugTest : BaseTest
     {
         [Test]
-        public void ReproductionImportBugTest() // не ищется, пока черновик
+        public void ReproductionImportBugTest()
         {
             //базовый степ логин
             Driver.Navigate().GoToUrl("https://qase.io/");
@@ -30,7 +31,7 @@ namespace Diploma.Tests.UITests
             IWebElement projectArea = Driver.FindElement(By.CssSelector("a[href= '/project/23']"));
             projectArea.Click();
             Thread.Sleep(8000);
-            IWebElement importButton = Driver.FindElement(By.XPath("//button[@class='G1dmaA ecSEF_ IAcAWv']/span[text()='Import']"));                   
+            IWebElement importButton = Driver.FindElement(By.XPath("//button[@class='G1dmaA ecSEF_ IAcAWv']/span[text()='Import']"));
             importButton.Click();
             Thread.Sleep(4000);
 

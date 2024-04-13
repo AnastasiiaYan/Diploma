@@ -1,4 +1,5 @@
-﻿/* 1 тест на загрузку файла - неуспешно */
+﻿/* тест на загрузку файла */
+
 using java.awt;
 using OpenQA.Selenium;
 using System.Reflection;
@@ -8,7 +9,7 @@ namespace Diploma.Tests.UITests
     internal class UploadTest : BaseTest
     {
         [Test]
-        public void UploadFileTest() // не ищется кнопка, пока черновик
+        public void UploadFileTest()
         {
             //базовый степ логин
             Driver.Navigate().GoToUrl("https://qase.io/");
@@ -23,7 +24,7 @@ namespace Diploma.Tests.UITests
 
             IWebElement signInButton = Driver.FindElement(By.CssSelector("button[type= 'submit']"));
             signInButton.Click();
- 
+
             //сам кейс            
             Thread.Sleep(8000);
             IWebElement projectArea = Driver.FindElement(By.CssSelector("a[href= '/project/23']"));

@@ -1,4 +1,4 @@
-﻿/*1 тест на проверку поля для ввода на граничные значения + 1 тест на ввод данных превышающих допустимые + 1 тест на проверку всплывающего сообщения */
+﻿/* проверка поля для ввода на граничные значения + ввод данных превышающих допустимые + проверка всплывающего сообщения */
 
 using Diploma.Tests.UITests;
 using OpenQA.Selenium;
@@ -7,7 +7,7 @@ namespace Diploma.Tests
 {
     internal class BoundaryInputTest : BaseTest
     {
-        [Test]    
+        [Test]
         public void NotEnoughInputTest()
         {
             Driver.Navigate().GoToUrl("https://app.qase.io/signup");
@@ -43,5 +43,5 @@ namespace Diploma.Tests
 
             IWebElement emailError = Driver.FindElement(By.XPath("//span[@class='xtWHgv' and text()=\"Value 'aytestqaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqpqz@gmail.com' does not match format email of type string\"]"));
         }
-    }    
+    }
 }
