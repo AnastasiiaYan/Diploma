@@ -1,24 +1,19 @@
-﻿using Diploma.Objects.Pages;
+﻿using Diploma.Helpers.Configuration;
+using Diploma.Objects.Pages;
+using Diploma.Objects.Steps;
 using Diploma.Tests.UITests;
 
 namespace Diploma.Tests
 {
-    internal class AutorizationTests : BaseTest
+    internal class LoginTests : BaseTest
     {
         [Test]    
-        public void SuccessfulAuthorizationTest()
+        public void SuccessfulLoginTest()
         {
-            LoginPage loginPage = new LoginPage(Driver);
-            StartPage startPage = new StartPage(Driver);
+            LoginSteps loginSteps = new LoginSteps(Driver);
             ProjectsPage projectsPage = new ProjectsPage(Driver);
 
-            var emailText = "aytestqa@gmail.com";
-            var passwordText = "qwertyTMS24.";
-
-            startPage.ClickOnSignInButton();
-            loginPage.SendKeysIntoEmailInputField(emailText);
-            loginPage.SendKeysIntoPasswordInputField(passwordText);
-            loginPage.ClickOnSubmitButton();
+            loginSteps.Login(Configurator.AppSettings.Username, Configurator.AppSettings.Password);
 
             Assert.That(projectsPage.IsPageOpened());
         }        
