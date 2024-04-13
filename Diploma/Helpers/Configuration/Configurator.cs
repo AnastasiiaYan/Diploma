@@ -46,5 +46,6 @@ namespace Diploma.Helpers.Configuration
         }
 
         public static string? BrowserType => Configuration[nameof(BrowserType)];
+        public static double WaitsTimeout => 10;
     }
 }

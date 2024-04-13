@@ -1,28 +1,28 @@
-﻿using Diploma.Tests.UITests;
+﻿using Diploma.Objects.Pages;
+using Diploma.Tests.UITests;
 using OpenQA.Selenium;
 
 namespace Diploma.Tests
 {
     internal class AutorizationTests : BaseTest
     {
-        [Test]   //это будет BASESTEP    
+        [Test]    
         public void SuccessfulAuthorizationTest()
         {
+            LoginPage loginPage = new LoginPage(Driver);
+            var emailText = "aytestqa@gmail.com";
+            var passwordText = "qwertyTMS24.";
+
             Driver.Navigate().GoToUrl("https://qase.io/");            
 
             IWebElement mainSigninButton = Driver.FindElement(By.Id("signin"));
-            mainSigninButton.Click();            
+            mainSigninButton.Click();
 
-            IWebElement emailInput = Driver.FindElement(By.Name("email"));
-            emailInput.SendKeys("aytestqa@gmail.com");
-            IWebElement pswInput = Driver.FindElement(By.Name("password"));
-            pswInput.SendKeys("qwertyTMS24.");
+            loginPage.SendKeysIntoEmailInputField(emailText);
+            loginPage.SendKeysIntoPasswordInputField(passwordText);
+            loginPage.ClickOnSignInButton();
 
-            IWebElement signInButton = Driver.FindElement(By.CssSelector("button[type= 'submit']"));
-            signInButton.Click();
-            Thread.Sleep(2000);//тут должен быть вейтхелпер                     
-            
-            Assert.That(IsPageOpened());//тут должно обыть описание страницы отдельным файлом
+            Assert.That(IsPageOpened());
         }        
     }    
 }

@@ -1,5 +1,7 @@
 ﻿using OpenQA.Selenium;
 using Diploma.Core;
+using Diploma.Helpers;
+using Diploma.Helpers.Configuration;
 
 namespace Diploma.Tests.UITests;
 
@@ -8,12 +10,13 @@ namespace Diploma.Tests.UITests;
 public class BaseTest
 {
     protected IWebDriver Driver { get; set; }
+    protected WaitsHelper WaitsHelper { get; private set; }
 
     [SetUp]
     public void Setup()
     {
         Driver = new Browser().Driver;
-
+        WaitsHelper = new WaitsHelper(Driver, TimeSpan.FromSeconds(Configurator.WaitsTimeout));
     }
 
     [TearDown]
@@ -21,11 +24,11 @@ public class BaseTest
     {
         Driver.Quit();
     }
-    public bool IsPageOpened() //проверяется открытие станицы после логина
+    public bool IsPageOpened()
     {
         try
         {
-            Driver.FindElement(By.ClassName("mTiiQU"));//попробовать переписать с подставлением page
+            Driver.FindElement(By.ClassName("mTiiQU"));
             return true;
         }
         catch (Exception)

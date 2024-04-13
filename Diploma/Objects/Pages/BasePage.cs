@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Diploma.Helpers;
+using OpenQA.Selenium;
+using Diploma.Helpers.Configuration;
 
 namespace Diploma.Objects.Pages
 {
-    internal class BasePage
+    public abstract class BasePage
     {
+        protected IWebDriver Driver {  get; set; }
+        protected WaitsHelper WaitsHelper { get; set; }
+
+        public BasePage(IWebDriver driver) 
+        {
+            Driver = driver;
+            WaitsHelper = new WaitsHelper(Driver, TimeSpan.FromSeconds(Configurator.WaitsTimeout));
+        }
     }
 }
