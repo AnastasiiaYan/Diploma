@@ -39,8 +39,4 @@
     <PackageReference Include="WebDriverManager" Version="2.17.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Tests\APITests\" />
-  </ItemGroup>
-
 </Project>

@@ -1,22 +1,22 @@
 using Diploma.Clients;
-using Diploma.Services.SystemFields;
+using Diploma.Services.Projects;
 
 namespace Diploma.Tests.APITests;
 
 public class BaseApiTest
 {
-    protected SystemFieldsService SystemFieldsService;
+    protected ProjectsService? ProjectsService;
 
     [OneTimeSetUp]
     public void SetUpApi()
     {
-        var restClient = new QaseRestClient();
-        SystemFieldsService = new SystemFieldsService(restClient);
+        var restClient = new ApiRestClient();
+        ProjectsService = new ProjectsService(restClient);
     }
     
     [OneTimeTearDown]
     public void TearDown()
     {
-        SystemFieldsService.Dispose();
+        ProjectsService!.Dispose();
     }
 }
