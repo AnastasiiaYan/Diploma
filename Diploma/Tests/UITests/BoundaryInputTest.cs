@@ -3,8 +3,6 @@
 using Diploma.Helpers.Configuration;
 using Diploma.Objects.Pages;
 using Diploma.Objects.Steps;
-using Diploma.Tests.UITests;
-using OpenQA.Selenium;
 
 namespace Diploma.Tests.UITests
 {
@@ -28,7 +26,24 @@ namespace Diploma.Tests.UITests
             });
         }
 
-        //добавить тест точное граничное значение?
+        [Test]
+        public void ExactBoundaryInputTest()
+        {
+            CreateAccounSteps createAccounSteps = new CreateAccounSteps(Driver);
+            CreateAccountPage createAccountPage = new CreateAccountPage(Driver);
+            var exactBoundaryEmail = "cytestqaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqpq@gmail.com"; //можно улучшить рандомайзером
+            var exactBoundaryPsw = "Qa111111.112";
+            var pswConfirmInput = exactBoundaryPsw;
+
+            createAccounSteps.Registration(exactBoundaryEmail, exactBoundaryPsw, pswConfirmInput);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(!createAccountPage.IsPageOpened());
+                Assert.That(!createAccountPage.EmailWarning.Displayed);
+                Assert.That(!createAccountPage.PasswordWarning.Displayed);
+            });
+        }
 
         [Test]
         public void ToolargeInputTest()

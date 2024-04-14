@@ -21,13 +21,8 @@ namespace Diploma.Objects.Pages
         public void SendKeysIntoPasswordInputField(string input) => PasswordInputField.SendKeys(input);        
         public void ClickOnSubmitButton() => SubmitButton.Click();
 
-        public string GetErrorLoginAlertText() 
-        {
-            return ErrorLoginAlerrt.Text;
-        }
-        public override bool IsPageOpened()
-        {
-            return EmailInputField.Displayed && PasswordInputField.Displayed;
-        }
+        public string GetErrorLoginAlertText() => ErrorLoginAlerrt.Text;
+        
+        public override bool IsPageOpened() => EmailInputField.Displayed && PasswordInputField.Displayed;
     }
 }
