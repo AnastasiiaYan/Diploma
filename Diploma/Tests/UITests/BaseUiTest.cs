@@ -7,7 +7,7 @@ namespace Diploma.Tests.UITests;
 
 [Parallelizable(scope: ParallelScope.All)] //параллелизация запусков
 [FixtureLifeCycle(LifeCycle.InstancePerTestCase)] //отдельный экземпляр для каждого
-public class BaseTest
+public class BaseUiTest
 {
     protected IWebDriver Driver { get; set; }
     protected WaitsHelper WaitsHelper { get; private set; }
