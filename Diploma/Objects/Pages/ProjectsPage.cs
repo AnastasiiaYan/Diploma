@@ -13,16 +13,10 @@ namespace Diploma.Objects.Pages
 
         private static readonly By createProjectButton = By.Id("createButton");
         private static readonly By notificationsButton = By.CssSelector(".b5tgEy [aria-label='Notifications']");
+
         public IWebElement CreateProjectButton => WaitsHelper.WaitForExists(createProjectButton);
 
-        public void ClickOnSignInButton()
-        {
-            CreateProjectButton.Click();
-        }
-
-        public override bool IsPageOpened()
-        {
-            return CreateProjectButton.Displayed;
-        }
+        public void ClickOnSignInButton() => CreateProjectButton.Click();   
+        public override bool IsPageOpened() => CreateProjectButton.Displayed;        
     }
 }

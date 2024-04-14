@@ -8,17 +8,13 @@ namespace Diploma.Objects.Pages
         public StartPage(IWebDriver driver) : base(driver) { }
 
         private static readonly By signInButton = By.Id("signin");
+        private static readonly By createAccountButton = By.XPath("//a[contains(text(), 'Start for free')]");
 
         public IWebElement SignInButton => WaitsHelper.WaitForExists(signInButton);
+        public IWebElement CreateAccountButton => WaitsHelper.WaitForExists(createAccountButton);
 
-        public void ClickOnSignInButton()
-        {
-            SignInButton.Click();
-        }
-
-        public override bool IsPageOpened()
-        {
-            return SignInButton.Displayed;
-        }
+        public void ClickOnSignInButton() => SignInButton.Click();
+        public void ClickCreateAccountButton() => CreateAccountButton.Click();
+        public override bool IsPageOpened() => SignInButton.Displayed;        
     }
 }

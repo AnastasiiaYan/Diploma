@@ -1,9 +1,8 @@
 ﻿using Diploma.Helpers.Configuration;
 using Diploma.Objects.Pages;
 using Diploma.Objects.Steps;
-using Diploma.Tests.UITests;
 
-namespace Diploma.Tests
+namespace Diploma.Tests.UITests
 {
     internal class LoginTests : BaseTest
     {

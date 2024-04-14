@@ -1,47 +1,49 @@
-﻿/* проверка поля для ввода на граничные значения + ввод данных превышающих допустимые + проверка всплывающего сообщения */
+﻿/* проверка поля для ввода на граничные значения + ввод данных превышающих допустимые */
 
+using Diploma.Helpers.Configuration;
+using Diploma.Objects.Pages;
+using Diploma.Objects.Steps;
 using Diploma.Tests.UITests;
 using OpenQA.Selenium;
 
-namespace Diploma.Tests
+namespace Diploma.Tests.UITests
 {
     internal class BoundaryInputTest : BaseTest
     {
         [Test]
         public void NotEnoughInputTest()
         {
-            Driver.Navigate().GoToUrl("https://app.qase.io/signup");
-            Thread.Sleep(2000);//тут должен быть вейтхелпер          
+            CreateAccounSteps createAccounSteps = new CreateAccounSteps(Driver);
+            CreateAccountPage createAccountPage = new CreateAccountPage(Driver);
+            var newEmail = "aytestqa11@gmail.com";
+            var notEnoughPsw = "Qa111111.11";
+            var pswConfirmInput = notEnoughPsw;
 
-            IWebElement emailInput = Driver.FindElement(By.Name("email"));
-            emailInput.SendKeys("aytestqaa@gmail.com");
-            IWebElement pswInput = Driver.FindElement(By.Name("password"));
-            pswInput.SendKeys("Qa111111.11");
-            IWebElement pswConfirmInput = Driver.FindElement(By.Name("passwordConfirmation"));
-            pswConfirmInput.SendKeys("Qa111111.11");
-            IWebElement signInButton = Driver.FindElement(By.CssSelector("button[type= 'submit']"));
-            signInButton.Click();
-            Thread.Sleep(2000);//тут должен быть вейтхелпер 
+            createAccounSteps.Registration(newEmail, notEnoughPsw, pswConfirmInput);
 
-            IWebElement passwordWarning = Driver.FindElement(By.XPath("//small[@class='f75Cb_' and text()='Password must has at least 12 characters']"));
+            Assert.Multiple(() =>
+            {
+                Assert.That(createAccountPage.GetPasswordWarningText(), Is.EqualTo("Password must has at least 12 characters"));
+                Assert.That(createAccountPage.IsPageOpened());
+            });
         }
+
+        //добавить тест точное граничное значение?
+
         [Test]
-        public void TooMuchInputTest()
+        public void ToolargeInputTest()
         {
-            Driver.Navigate().GoToUrl("https://app.qase.io/signup");
-            Thread.Sleep(2000);//тут должен быть вейтхелпер          
+            CreateAccounSteps createAccounSteps = new CreateAccounSteps(Driver);
+            CreateAccountPage createAccountPage = new CreateAccountPage(Driver);
+            var toolargeEmail = "aytestqaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqpqz@gmail.com";// на 1 символ больше допустимого, можно улучшить рандомайзером
 
-            IWebElement emailInput = Driver.FindElement(By.Name("email"));
-            emailInput.SendKeys("aytestqaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqpqz@gmail.com"); // на 1 символ больше допустимого, можно улучшить рандомайзером
-            IWebElement pswInput = Driver.FindElement(By.Name("password"));
-            pswInput.SendKeys("Qa111111.1112");
-            IWebElement pswConfirmInput = Driver.FindElement(By.Name("passwordConfirmation"));
-            pswConfirmInput.SendKeys("Qa111111.1112");
-            IWebElement signInButton = Driver.FindElement(By.CssSelector("button[type= 'submit']"));
-            signInButton.Click();
-            Thread.Sleep(500);//тут должен быть вейтхелпер 
+            createAccounSteps.Registration (toolargeEmail, Configurator.AppSettings.Password, Configurator.AppSettings.Password);   
 
-            IWebElement emailError = Driver.FindElement(By.XPath("//span[@class='xtWHgv' and text()=\"Value 'aytestqaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqpqz@gmail.com' does not match format email of type string\"]"));
+            Assert.Multiple(() =>
+            {
+                Assert.That(createAccountPage.GetEmailWarningText(), Is.EqualTo($"Value '{toolargeEmail}' does not match format email of type string"));
+                Assert.That(createAccountPage.IsPageOpened());
+            });
         }
     }
 }

@@ -3,37 +3,36 @@ using Diploma.Core;
 using Diploma.Helpers;
 using Diploma.Helpers.Configuration;
 
-namespace Diploma.Tests.UITests;
-
-[Parallelizable(scope: ParallelScope.All)] //параллелизация запусков
-[FixtureLifeCycle(LifeCycle.InstancePerTestCase)] //отдельный экземпляр для каждого
-public class BaseTest
+namespace Diploma.Tests.UITests
 {
-    protected IWebDriver Driver { get; set; }
-    protected WaitsHelper WaitsHelper { get; private set; }
+    [Parallelizable(scope: ParallelScope.All)] //параллелизация запусков
+    [FixtureLifeCycle(LifeCycle.InstancePerTestCase)] //отдельный экземпляр для каждого
+    public class BaseTest
+    {
+        protected IWebDriver Driver { get; set; }
+        protected WaitsHelper WaitsHelper { get; private set; }
 
-    [SetUp]
-    public void Setup()
-    {
-        Driver = new Browser().Driver;
-        WaitsHelper = new WaitsHelper(Driver, TimeSpan.FromSeconds(Configurator.WaitsTimeout));
-    }
-
-    [TearDown]
-    public void TearDown()
-    {
-        Driver.Quit();
-    }
-    public bool IsPageOpened()
-    {
-        try
+        [SetUp]
+        public void Setup()
         {
-            Driver.FindElement(By.ClassName("mTiiQU"));
-            return true;
+            Driver = new Browser().Driver;
+            WaitsHelper = new WaitsHelper(Driver, TimeSpan.FromSeconds(Configurator.WaitsTimeout));
         }
-        catch (Exception)
+
+        [TearDown]
+        public void TearDown() => Driver.Quit();
+        
+        public bool IsPageOpened()
         {
-            return false;
+            try
+            {
+                Driver.FindElement(By.ClassName("mTiiQU"));
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }
