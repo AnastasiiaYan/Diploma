@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 
 namespace Diploma.Tests.UITests
 {
-    public class CreateEntityTest : BaseTest
+    public class CreateEntityTest : BaseUiTest
     {
         [Test]
         public void CreateProjectTest()

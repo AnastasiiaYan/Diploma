@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 
 namespace Diploma.Tests.UITests
 {
-    internal class MessageTest : BaseTest
+    internal class MessageTest : BaseUiTest
     {
         [Test]
         public void PopUpMessageTest()

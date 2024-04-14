@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace Diploma.Tests.UITests
 {
-    internal class ReproductionBugTest : BaseTest
+    internal class ReproductionBugTest : BaseUiTest
     {
         [Test]
         public void ReproductionImportBugTest()

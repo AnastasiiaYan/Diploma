@@ -6,7 +6,7 @@ using Diploma.Objects.Steps;
 
 namespace Diploma.Tests.UITests
 {
-    internal class InvalidInputTest : BaseTest
+    internal class InvalidInputTest : BaseUiTest
     {
         [Test]
         public void InvalidLoginTest()

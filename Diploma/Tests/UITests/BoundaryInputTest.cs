@@ -8,7 +8,7 @@ using OpenQA.Selenium;
 
 namespace Diploma.Tests.UITests
 {
-    internal class BoundaryInputTest : BaseTest
+    internal class BoundaryInputTest : BaseUiTest
     {
         [Test]
         public void NotEnoughInputTest()

@@ -4,7 +4,7 @@ using Diploma.Objects.Steps;
 
 namespace Diploma.Tests.UITests
 {
-    internal class LoginTests : BaseTest
+    internal class LoginTests : BaseUiTest
     {
         [Test]    
         public void SuccessfulLoginTest()

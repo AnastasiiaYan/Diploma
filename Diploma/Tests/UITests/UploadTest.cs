@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Diploma.Tests.UITests
 {
-    internal class UploadTest : BaseTest
+    internal class UploadTest : BaseUiTest
     {
         [Test]
         public void UploadFileTest()

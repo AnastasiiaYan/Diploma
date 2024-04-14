@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 
 namespace Diploma.Tests.UITests
 {
-    public class RemoveEntityTest : BaseTest
+    public class RemoveEntityTest : BaseUiTest
     {
         [Test]
         public void RemoveProjectTest()
