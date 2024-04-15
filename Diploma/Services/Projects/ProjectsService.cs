@@ -1,4 +1,4 @@
-﻿using Diploma.Clients;
+﻿using Diploma.Core.Clients;
 using Diploma.Models;
 using RestSharp;
 
@@ -6,9 +6,9 @@ namespace Diploma.Services.Projects
 {
     public class ProjectsService : IProjectsService, IDisposable
     {
-        private readonly Clients.ApiRestClient _client;
+        private readonly ApiRestClient _client;
 
-        public ProjectsService(Clients.ApiRestClient client)
+        public ProjectsService(ApiRestClient client)
         {
             _client = client;
         }
@@ -20,6 +20,7 @@ namespace Diploma.Services.Projects
 
             return _client.ExecuteAsync<NewProjectResponse>(request);
         }
+
         public void Dispose()
         {
             _client?.Dispose();

@@ -1,4 +1,4 @@
-using Diploma.Clients;
+using Diploma.Core.Clients;
 using Diploma.Services.Projects;
 
 namespace Diploma.Tests.APITests;

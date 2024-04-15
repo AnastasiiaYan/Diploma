@@ -15,16 +15,29 @@ namespace Diploma.Objects.Pages
         private static readonly By notificationsButton = By.CssSelector(".b5tgEy [aria-label='Notifications']");
         private static readonly By projectNameInput = By.Id("project-name");
         private static readonly By createProjDialogButton = By.CssSelector("button[type= 'submit']");
-        
+        private static readonly By projectRow = By.XPath("//div[@class='NFxRR3']/a[@class='cx2QU4']");
+        private static readonly By projectBreadcrumbs = By.CssSelector("button.G1dmaA.eWFeX4.eij1r4");
+        private static readonly By removeProjectButton = By.CssSelector("button.EehRY_.Wy99v3.fwhtHZ[tabindex=\"0\"][type=\"button\"][role=\"menuitem\"]");
+        private static readonly By deleteProjectButton = By.CssSelector("button.G1dmaA.X8bxUI.IAcAWv");
+
+
         public IWebElement CreateProjectButton => WaitsHelper.WaitForExists(createNewProjectButton);
         public IWebElement NotificationsButton => WaitsHelper.WaitForExists(notificationsButton);
         public IWebElement ProjectNameInput => WaitsHelper.WaitForExists(projectNameInput);
         public IWebElement CreateProjDialogButton => WaitsHelper.WaitForExists(createProjDialogButton);
+        public IWebElement ProjectRow => WaitsHelper.WaitForExists(projectRow);
+        public IWebElement ProjectBreadcrumbs => WaitsHelper.WaitForExists(projectBreadcrumbs);
+        public IWebElement RemoveProjectButton => WaitsHelper.WaitForExists(removeProjectButton);
+        public IWebElement DeleteProjectButton => WaitsHelper.WaitForExists(deleteProjectButton);
 
 
         public void ClickCreateProjectButton() => CreateProjectButton.Click();
         public void ClickCreateProjDialogButton() => CreateProjDialogButton.Click();
+        public void ClickProjectBreadcrumbs() => ProjectBreadcrumbs.Click();
+        public void ClickRemoveProjectButton() => RemoveProjectButton.Click();
+        public void ClickDeleteProjectButton() => DeleteProjectButton.Click();
         public void SendKeysProjectNameInput(string input) => ProjectNameInput.SendKeys(input);
-        public override bool IsPageOpened() => CreateProjectButton.Displayed;        
+        public override bool IsPageOpened() => CreateProjectButton.Displayed;
+        public bool IsProjectExist() => ProjectRow.Displayed;
     }
 }

@@ -6,7 +6,6 @@ namespace Diploma.Tests.APITests
 {
     public class ProjectTests : BaseApiTest
     {
-        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         [Test]
         [Order(1)]
@@ -26,8 +25,8 @@ namespace Diploma.Tests.APITests
                 Result = new NewProjectResultData { Code = requestBody.Code }
             };
 
-            var actualResponse = ProjectsService!.CreateNewProject(requestBody);
-            _logger.Info(actualResponse.ToString());
+            var actualResponse = ProjectsService!.CreateNewProject(requestBody).Result;
+            //assert
         }
     }
 }

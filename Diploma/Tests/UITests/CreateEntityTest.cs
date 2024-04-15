@@ -14,15 +14,15 @@ namespace Diploma.Tests.UITests
             LoginSteps loginSteps = new LoginSteps(Driver);
             ProjectsPage projectsPage = new ProjectsPage(Driver);
             ProjectRepositoryPage projectRepositoryPage = new ProjectRepositoryPage(Driver);
-            var projectNameInput = "CreateProjectTest";
-            //добавить VAR код репозитория и с ним в ассерте сравнивать 
+            var projectNameInput = "CREPT";
+             
             loginSteps.Login(Configurator.AppSettings.Username, Configurator.AppSettings.Password);
 
             projectsPage.ClickCreateProjectButton();
             projectsPage.SendKeysProjectNameInput(projectNameInput);
             projectsPage.ClickCreateProjDialogButton();
             
-            Assert.That(projectRepositoryPage.HeaderElement.Text.ToLower, Does.Contain($"{projectNameInput} repository"));
+            Assert.That(projectRepositoryPage.GetHeaderElementText(), Does.Contain($"{projectNameInput} repository"));
         }
     }
 }
