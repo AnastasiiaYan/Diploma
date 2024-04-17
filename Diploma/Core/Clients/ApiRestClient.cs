@@ -8,7 +8,7 @@ namespace Diploma.Core.Clients
     {
         private readonly RestClient _client;
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
-        private readonly string SecretHeader = "****"; //убрать
+        private readonly String SecretHeader = "72d93f3d85b5d4b18e0d3c52b3eb0701ba3b2e6dcda2f59674fd20720b20a99d"; //убрать
 
         public ApiRestClient()
         {

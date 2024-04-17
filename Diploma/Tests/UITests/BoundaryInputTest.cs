@@ -1,14 +1,18 @@
 ﻿/* проверка поля для ввода на граничные значения + ввод данных превышающих допустимые */
-
+using Allure.Net.Commons;
+using Allure.NUnit;
+using Allure.NUnit.Attributes;
 using Diploma.Helpers.Configuration;
 using Diploma.Objects.Pages;
 using Diploma.Objects.Steps;
 
 namespace Diploma.Tests.UITests
 {
+    [AllureSuite("Проверка поля для ввода на граничные значения + ввод данных превышающих допустимые")]
     internal class BoundaryInputTest : BaseUiTest
     {
         [Test]
+        [AllureFeature("Ввод граничного значения минус один")]
         public void NotEnoughInputTest()
         {
             CreateAccounSteps createAccounSteps = new CreateAccounSteps(Driver);
@@ -27,6 +31,7 @@ namespace Diploma.Tests.UITests
         }
 
         [Test]
+        [AllureFeature("Ввод граничного значения")]
         public void ExactBoundaryInputTest()
         {
             CreateAccounSteps createAccounSteps = new CreateAccounSteps(Driver);
@@ -46,6 +51,7 @@ namespace Diploma.Tests.UITests
         }
 
         [Test]
+        [AllureFeature("Ввод граничного значения плюс один")]
         public void ToolargeInputTest()
         {
             CreateAccounSteps createAccounSteps = new CreateAccounSteps(Driver);
