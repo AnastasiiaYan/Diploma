@@ -1,6 +1,13 @@
 ﻿/* проверка всплывающего сообщения */
 
+using Diploma.Helpers.Configuration;
+using Diploma.Objects.Pages;
+using Diploma.Objects.Steps;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 
 namespace Diploma.Tests.UITests
 {
@@ -9,23 +16,16 @@ namespace Diploma.Tests.UITests
         [Test]
         public void PopUpMessageTest()
         {
-            //базовый степ логин
-            Driver.Navigate().GoToUrl("https://qase.io/");
+            LoginSteps loginSteps = new LoginSteps(Driver);
+            ProjectsPage projectsPage = new ProjectsPage(Driver);
+            Actions action = new Actions(Driver);
+            loginSteps.Login(Configurator.AppSettings.Username, Configurator.AppSettings.Password);
+            var actualMessage = projectsPage.MessageElement.GetAttribute("aria-label");
+            var expectedMessage = "Notifications";
 
-            IWebElement mainSigninButton = Driver.FindElement(By.Id("signin"));
-            mainSigninButton.Click();
-
-            IWebElement emailInput = Driver.FindElement(By.Name("email"));
-            emailInput.SendKeys("aytestqa@gmail.com");
-            IWebElement pswInput = Driver.FindElement(By.Name("password"));
-            pswInput.SendKeys("qwertyTMS24.");
-            IWebElement signInButton = Driver.FindElement(By.CssSelector("button[type= 'submit']"));
-            signInButton.Click();
-
-            //сам кейс
-            Thread.Sleep(4000);//тут должен быть вейтхелпер
-            IWebElement element = Driver.FindElement(By.CssSelector(".b5tgEy [aria-label='Notifications']"));
-            Assert.That(element.GetAttribute("data-balloon-pos").Contains("down"));
+            action.MoveToElement(projectsPage.MessageElement,5,5).Build().Perform();
+            
+            Assert.AreEqual(expectedMessage, actualMessage);
         }
     }
 }
