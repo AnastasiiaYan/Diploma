@@ -8,7 +8,7 @@ namespace Diploma.Tests.UITests
     public class CreateEntityTest : BaseUiTest
     {
         [Test]
-        [AllureFeature("Создание новой сущности: проект")]
+        [AllureFeature("Создание новой сущности: проект"), Order(1)]
         [AllureSeverity(Allure.Net.Commons.SeverityLevel.critical)]
 
         public void CreateProjectTest()

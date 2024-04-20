@@ -8,6 +8,7 @@ namespace Diploma.Tests.UITests
     public class RemoveEntityTest : BaseUiTest
     {
         [Test]
+        [AllureFeature("Удаление сущности: проект"), Order(2), Retry(15)]
         [AllureSeverity(Allure.Net.Commons.SeverityLevel.normal)]
         public void RemoveProjectTest()
         {
@@ -16,12 +17,14 @@ namespace Diploma.Tests.UITests
                         
             loginSteps.Login(Configurator.AppSettings.Username, Configurator.AppSettings.Password);
 
-            projectsPage.IsProjectExist();//переписать 
+            projectsPage.IsProjectExist();
+            
             projectsPage.ClickProjectBreadcrumbs();
             projectsPage.ClickRemoveProjectButton();
             projectsPage.ClickDeleteProjectButton();
-
-            Assert.That(!projectsPage.IsProjectExist());//переписать            
+            Driver.Navigate().Refresh();
+            
+            Assert.IsFalse(projectsPage.IsProjectExist());          
         }
     }
 }
