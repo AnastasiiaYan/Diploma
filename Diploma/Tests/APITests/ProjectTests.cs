@@ -1,27 +1,25 @@
 ﻿using System.Reflection;
+using Bogus;
 using Diploma.Models;
+using Diploma.Models.Fakers;
 
 namespace Diploma.Tests.APITests
 {
     public class ProjectTests : BaseApiTest
     {
-        NewProjectRequest newProjectRequest = new NewProjectRequest
-        {
-            Title = "Заголовок тестового проекта1",
-            Code = "TEST12",
-            Description = "Описание тестового проекта1",
-            Access = "all"
-        };
+        private static Faker<NewProjectRequest> NewProjectRequestFaker => new NewProjectRequestFaker();
 
         [Test]
         public void CreateNewProjectTest()
         {
+            NewProjectRequest newProjectRequest = NewProjectRequestFaker.Generate();
+
             NewProjectResponse expectedResponse = new NewProjectResponse
             {
                 Status = true,
-                Result = new NewProjectResultData 
-                { 
-                    Code = newProjectRequest.Code 
+                Result = new NewProjectResultData
+                {
+                    Code = newProjectRequest.Code
                 }
             };
 
@@ -37,6 +35,8 @@ namespace Diploma.Tests.APITests
         [Test]
         public void GetProjectByCodeTest()
         {
+            NewProjectRequest newProjectRequest = NewProjectRequestFaker.Generate();
+
             ProjectResultData expectedResultData = new ProjectResultData
             {
                 Title = newProjectRequest.Title,
@@ -88,7 +88,7 @@ namespace Diploma.Tests.APITests
         [Test]
         public void GetProjectByNonExistingCodeTest()
         {
-            var nonExistingCode = "123///";
+            var nonExistingCode = "///+++";
 
             ErrorResponse expectedResponse = new ErrorResponse
             {

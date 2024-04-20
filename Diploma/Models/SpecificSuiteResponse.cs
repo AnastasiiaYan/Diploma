@@ -12,10 +12,9 @@ namespace Diploma.Models
     {
         [JsonPropertyName("id")] public int Id { get; set; }
         [JsonPropertyName("title")] public string Title { get; set; }
-        [JsonPropertyName("description")] public string Description { get; set; }
-        [JsonPropertyName("preconditions")] public string Preconditions { get; set; }
+        [JsonPropertyName("description")] public string? Description { get; set; }
+        [JsonPropertyName("preconditions")] public string? Preconditions { get; set; }
         [JsonPropertyName("position")] public int Position { get; set; }
         [JsonPropertyName("cases_count")] public int CasesCount { get; set; }
-        [JsonPropertyName("parent_id")] public int? ParentId { get; set; }
     }
 }
