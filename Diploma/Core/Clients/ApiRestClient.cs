@@ -1,3 +1,4 @@
+using Diploma.Helpers.Configuration;
 using NLog;
 using RestSharp;
 
@@ -7,14 +8,13 @@ namespace Diploma.Core.Clients
     {
         private readonly RestClient _client;
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
-        private readonly string SecretHeader = "***";
 
         public ApiRestClient()
         {
-            var options = new RestClientOptions("https://api.qase.io");
+            var options = new RestClientOptions(Configurator.AppSettings.URI!);
 
             _client = new RestClient(options);
-            _client.AddDefaultHeader("Token", SecretHeader);
+            _client.AddDefaultHeader("Token", Configurator.AppSettings.ApiKey!);
         }
 
         public void Dispose()
