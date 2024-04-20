@@ -29,12 +29,12 @@ namespace Diploma.Services.Projects
             return _client.ExecuteAsync<ProjectResponse>(request);
         }
 
-        public Task<ProjectErrorResponse> GetProjectByNonExistingCodeCode(string nonExistingCode)
+        public Task<ErrorResponse> GetProjectByNonExistingCode(string nonExistingCode)
         {
             var request = new RestRequest("/v1/project/{code}")
                 .AddUrlSegment("code", nonExistingCode);
 
-            return _client.ExecuteAsync<ProjectErrorResponse>(request);
+            return _client.ExecuteAsync<ErrorResponse>(request);
         }
 
         public void Dispose()

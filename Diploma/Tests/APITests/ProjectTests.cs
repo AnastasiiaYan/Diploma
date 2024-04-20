@@ -19,7 +19,10 @@ namespace Diploma.Tests.APITests
             NewProjectResponse expectedResponse = new NewProjectResponse
             {
                 Status = true,
-                Result = new NewProjectResultData { Code = newProjectRequest.Code }
+                Result = new NewProjectResultData 
+                { 
+                    Code = newProjectRequest.Code 
+                }
             };
 
             var actualResponse = ProjectsService!.CreateNewProject(newProjectRequest).Result;
@@ -34,21 +37,21 @@ namespace Diploma.Tests.APITests
         [Test]
         public void GetProjectByCodeTest()
         {
-            ProjectResponse.ProjectResultData resultData = new ProjectResponse.ProjectResultData
+            ProjectResultData expectedResultData = new ProjectResultData
             {
                 Title = newProjectRequest.Title,
                 Code = newProjectRequest.Code,
-                Counts = new ProjectResponse.Counts
+                Counts = new Counts
                 {
                     Cases = 0,
                     Suites = 0,
                     Milestones = 0,
-                    Runs = new ProjectResponse.Runs
+                    Runs = new Runs
                     {
                         Total = 0,
                         Active = 0
                     },
-                    Defects = new ProjectResponse.Defects
+                    Defects = new Defects
                     {
                         Total = 0,
                         Open = 0
@@ -59,7 +62,7 @@ namespace Diploma.Tests.APITests
             ProjectResponse expectedResponse = new ProjectResponse
             {
                 Status = true,
-                Result = resultData
+                Result = expectedResultData
             };
 
             ProjectsService!.CreateNewProject(newProjectRequest);
@@ -71,9 +74,9 @@ namespace Diploma.Tests.APITests
                 Assert.That(actualResponse.Status, Is.EqualTo(expectedResponse.Status));
                 Assert.That(actualResponse.Result.Title, Is.EqualTo(expectedResponse.Result.Title));
                 Assert.That(actualResponse.Result.Code, Is.EqualTo(expectedResponse.Result.Code));
-                foreach (PropertyInfo property in typeof(ProjectResponse.Counts).GetProperties())
+                foreach (PropertyInfo property in typeof(Counts).GetProperties()) // возможно проще перечислить
                 {
-                    object value = property.GetValue(actualResponse.Result.Counts);
+                    var value = property.GetValue(actualResponse.Result.Counts);
                     if (value is int numericValue)
                     {
                         Assert.That(numericValue, Is.EqualTo(0));
@@ -87,15 +90,13 @@ namespace Diploma.Tests.APITests
         {
             var nonExistingCode = "123///";
 
-            ProjectErrorResponse expectedResponse = new ProjectErrorResponse
+            ErrorResponse expectedResponse = new ErrorResponse
             {
                 Status = false,
                 ErrorMessage = "Project not found"
             };
 
-            ProjectsService!.CreateNewProject(newProjectRequest);
-
-            var actualResponse = ProjectsService!.GetProjectByNonExistingCodeCode(nonExistingCode).Result;
+            var actualResponse = ProjectsService!.GetProjectByNonExistingCode(nonExistingCode).Result;
 
             Assert.Multiple(() =>
             {

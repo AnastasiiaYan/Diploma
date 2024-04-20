@@ -7,12 +7,14 @@ using Allure.Net.Commons;
 using Diploma.Objects.Steps;
 using System.Text;
 using NUnit.Allure.Core;
+using Allure.NUnit.Attributes;
 
 namespace Diploma.Tests.UITests
 {
-    [Parallelizable(scope: ParallelScope.All)] //параллелизация запусков
-    [FixtureLifeCycle(LifeCycle.InstancePerTestCase)] //отдельный экземпляр для каждого
+    [Parallelizable(scope: ParallelScope.All)]
+    [FixtureLifeCycle(LifeCycle.InstancePerTestCase)]
     [AllureNUnit]
+    [AllureOwner("A.SAMOYLOVA")]
     public class BaseUiTest
     {
         protected IWebDriver Driver { get; set; }
@@ -42,15 +44,7 @@ namespace Diploma.Tests.UITests
                 {
                     Screenshot screenshot = ((ITakesScreenshot)Driver).GetScreenshot();
                     byte[] screenshotBytes = screenshot.AsByteArray;
-                    // скрин области
-                    //IWebElement element = Driver.FindElement(By.Id("SSS"));
-                    //Screenshot screenshotElement = ((ITakesScreenshot)element).GetScreenshot();
-
-                    // Прикрепление скриншота к отчету Allure
-                    // Вариант 1
-                    //AllureLifecycle.Instance.AddAttachment("Screenshot", "image/png", screenshotBytes);
-
-                    // Вариант 2
+                    
                     AllureApi.AddAttachment(
                         "data.txt",
                         "text/plain",

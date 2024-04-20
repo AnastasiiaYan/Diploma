@@ -1,5 +1,6 @@
 ﻿/* проверка всплывающего сообщения */
 
+using Allure.NUnit.Attributes;
 using Diploma.Helpers.Configuration;
 using Diploma.Objects.Pages;
 using Diploma.Objects.Steps;
@@ -14,6 +15,7 @@ namespace Diploma.Tests.UITests
     internal class MessageTest : BaseUiTest
     {
         [Test]
+        [AllureSeverity(Allure.Net.Commons.SeverityLevel.minor)]
         public void PopUpMessageTest()
         {
             LoginSteps loginSteps = new LoginSteps(Driver);

@@ -1,5 +1,6 @@
 ﻿/* тест на загрузку файла */
 
+using Allure.NUnit.Attributes;
 using Diploma.Helpers.Configuration;
 using Diploma.Objects.Pages;
 using Diploma.Objects.Steps;
@@ -12,6 +13,7 @@ namespace Diploma.Tests.UITests
     internal class UploadTest : BaseUiTest
     {
         [Test]
+        [AllureSeverity(Allure.Net.Commons.SeverityLevel.normal)]
         public void UploadFileTest()
         {
 

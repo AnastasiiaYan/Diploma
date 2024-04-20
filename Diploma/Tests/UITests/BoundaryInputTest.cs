@@ -8,10 +8,10 @@ using Diploma.Objects.Steps;
 
 namespace Diploma.Tests.UITests
 {
-    [AllureSuite("Проверка поля для ввода на граничные значения + ввод данных превышающих допустимые")]
+    [AllureSubSuite("Проверка поля для ввода на граничные значения + ввод данных превышающих допустимые")]
     internal class BoundaryInputTest : BaseUiTest
     {
-        [Test]
+        [Test(Description = "NotEnoughInputTest")]
         [AllureFeature("Ввод граничного значения минус один")]
         public void NotEnoughInputTest()
         {
@@ -30,7 +30,7 @@ namespace Diploma.Tests.UITests
             });
         }
 
-        [Test]
+        [Test(Description = "ExactBoundaryInputTest")]
         [AllureFeature("Ввод граничного значения")]
         public void ExactBoundaryInputTest()
         {
@@ -50,7 +50,7 @@ namespace Diploma.Tests.UITests
             });
         }
 
-        [Test]
+        [Test(Description = "ToolargeInputTest")]
         [AllureFeature("Ввод граничного значения плюс один")]
         public void ToolargeInputTest()
         {

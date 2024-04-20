@@ -1,5 +1,6 @@
 ﻿/* 1 тест воспроизводящий любой дефект, в данном случае корректное альтернативное поведение при загрузке файла с неожиданной структурой*/
 
+using Allure.NUnit.Attributes;
 using Diploma.Helpers.Configuration;
 using Diploma.Objects.Pages;
 using Diploma.Objects.Steps;
@@ -13,6 +14,8 @@ namespace Diploma.Tests.UITests
     internal class ReproductionBugTest : BaseUiTest
     {
         [Test]
+        [AllureSeverity(Allure.Net.Commons.SeverityLevel.blocker)]
+        [AllureIssue("JIRA-123")]
         public void ReproductionImportBugTest()
         {
             LoginSteps loginSteps = new LoginSteps(Driver);

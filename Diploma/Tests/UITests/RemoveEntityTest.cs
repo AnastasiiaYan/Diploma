@@ -1,5 +1,6 @@
 ﻿/* тест на удаление сущности */
 
+using Allure.NUnit.Attributes;
 using Diploma.Helpers.Configuration;
 using Diploma.Objects.Pages;
 using Diploma.Objects.Steps;
@@ -10,6 +11,7 @@ namespace Diploma.Tests.UITests
     public class RemoveEntityTest : BaseUiTest
     {
         [Test]
+        [AllureSeverity(Allure.Net.Commons.SeverityLevel.normal)]
         public void RemoveProjectTest()
         {
             LoginSteps loginSteps = new LoginSteps(Driver);

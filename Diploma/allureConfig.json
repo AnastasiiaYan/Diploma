@@ -1,0 +1,9 @@
+{
+  "allure": {
+    "directory": "allure-results",
+    "links": [
+      "https://jira.org/{issue}",
+      "https://testrail.org/{tms}"
+    ]
+  }
+}

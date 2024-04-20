@@ -11,6 +11,7 @@ namespace Diploma.Tests.UITests
     {
         [Test]
         [AllureFeature("Ввод некорректных данных при авторизации")]
+        [AllureSeverity(Allure.Net.Commons.SeverityLevel.critical)]
         public void InvalidLoginTest()
         {
             LoginSteps loginSteps = new LoginSteps(Driver);

@@ -11,6 +11,8 @@ namespace Diploma.Tests.UITests
     {
         [Test]
         [AllureFeature("Создание новой сущности: проект")]
+        
+
         public void CreateProjectTest()
         {            
             LoginSteps loginSteps = new LoginSteps(Driver);
