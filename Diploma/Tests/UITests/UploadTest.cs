@@ -1,11 +1,7 @@
-﻿/* тест на загрузку файла */
-
-using Allure.NUnit.Attributes;
+﻿using Allure.NUnit.Attributes;
 using Diploma.Helpers.Configuration;
 using Diploma.Objects.Pages;
 using Diploma.Objects.Steps;
-using java.awt;
-using OpenQA.Selenium;
 using System.Reflection;
 
 namespace Diploma.Tests.UITests

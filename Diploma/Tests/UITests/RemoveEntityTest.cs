@@ -1,10 +1,7 @@
-﻿/* тест на удаление сущности */
-
-using Allure.NUnit.Attributes;
+﻿using Allure.NUnit.Attributes;
 using Diploma.Helpers.Configuration;
 using Diploma.Objects.Pages;
 using Diploma.Objects.Steps;
-using OpenQA.Selenium;
 
 namespace Diploma.Tests.UITests
 {

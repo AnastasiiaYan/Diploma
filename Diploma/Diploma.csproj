@@ -41,6 +41,7 @@
 
   <ItemGroup>
     <PackageReference Include="Allure.NUnit" Version="2.12.0" />
+    <PackageReference Include="Bogus" Version="35.5.0" />
     <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
     <PackageReference Include="IKVM" Version="8.7.6" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />

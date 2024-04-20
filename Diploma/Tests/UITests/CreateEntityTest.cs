@@ -1,6 +1,4 @@
-﻿/* создание сущности + отображениe диалогового окна */
-
-using Allure.NUnit.Attributes;
+﻿using Allure.NUnit.Attributes;
 using Diploma.Helpers.Configuration;
 using Diploma.Objects.Pages;
 using Diploma.Objects.Steps;
@@ -11,7 +9,7 @@ namespace Diploma.Tests.UITests
     {
         [Test]
         [AllureFeature("Создание новой сущности: проект")]
-        
+        [AllureSeverity(Allure.Net.Commons.SeverityLevel.critical)]
 
         public void CreateProjectTest()
         {            

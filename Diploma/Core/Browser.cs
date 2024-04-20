@@ -1,6 +1,5 @@
 ﻿using Diploma.Helpers.Configuration;
 using OpenQA.Selenium;
-using Diploma.Core;
 
 namespace Diploma.Core
 {
@@ -19,7 +18,6 @@ namespace Diploma.Core
 
             Driver?.Manage().Window.Maximize();
             Driver?.Manage().Cookies.DeleteAllCookies();
-            //Driver!.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);
         }
     }
 }

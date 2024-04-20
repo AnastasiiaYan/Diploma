@@ -1,4 +1,5 @@
-﻿using Diploma.Objects.Pages;
+﻿using Allure.NUnit.Attributes;
+using Diploma.Objects.Pages;
 using OpenQA.Selenium;
 
 namespace Diploma.Objects.Steps
@@ -14,6 +15,7 @@ namespace Diploma.Objects.Steps
             createAccountPage = new CreateAccountPage(driver);
         }
 
+        [AllureStep]
         public void Registration(string email, string password, string passwordConfirmation)
         {
             startPage.ClickCreateAccountButton();

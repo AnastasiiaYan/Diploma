@@ -1,6 +1,4 @@
-﻿/* 1 тест воспроизводящий любой дефект, в данном случае корректное альтернативное поведение при загрузке файла с неожиданной структурой*/
-
-using Allure.NUnit.Attributes;
+﻿using Allure.NUnit.Attributes;
 using Diploma.Helpers.Configuration;
 using Diploma.Objects.Pages;
 using Diploma.Objects.Steps;
