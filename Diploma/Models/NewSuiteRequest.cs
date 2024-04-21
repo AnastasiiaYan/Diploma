@@ -2,10 +2,10 @@
 
 namespace Diploma.Models
 {
-    public record NewProjectRequest
+    public record NewSuiteRequest
     {
         [JsonPropertyName("title")] public string Title { get; set; }
-        [JsonPropertyName("code")] public string Code { get; set; }
         [JsonPropertyName("description")] public string? Description { get; set; }
+        [JsonPropertyName("preconditions")] public string? Preconditions { get; set; }
     }
 }

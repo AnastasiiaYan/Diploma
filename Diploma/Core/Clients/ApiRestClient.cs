@@ -8,14 +8,13 @@ namespace Diploma.Core.Clients
     {
         private readonly RestClient _client;
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
-        private readonly String SecretHeader = ""; //убрать
 
         public ApiRestClient()
         {
-            var options = new RestClientOptions("https://api.qase.io"); // в конфиг
+            var options = new RestClientOptions(Configurator.AppSettings.URI!);
 
             _client = new RestClient(options);
-            _client.AddDefaultHeader("Token", SecretHeader);
+            _client.AddDefaultHeader("Token", Configurator.AppSettings.ApiKey!);
         }
 
         public void Dispose()

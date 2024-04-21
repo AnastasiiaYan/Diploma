@@ -1,10 +1,7 @@
-﻿/* тест на загрузку файла */
-
+﻿using Allure.NUnit.Attributes;
 using Diploma.Helpers.Configuration;
 using Diploma.Objects.Pages;
 using Diploma.Objects.Steps;
-using java.awt;
-using OpenQA.Selenium;
 using System.Reflection;
 
 namespace Diploma.Tests.UITests
@@ -12,26 +9,25 @@ namespace Diploma.Tests.UITests
     internal class UploadTest : BaseUiTest
     {
         [Test]
+        [AllureSeverity(Allure.Net.Commons.SeverityLevel.normal)]
         public void UploadFileTest()
         {
 
             LoginSteps loginSteps = new LoginSteps(Driver);
-            ProjectsPage projectsPage = new ProjectsPage(Driver);
+            ImportSteps importSteps = new ImportSteps(Driver);
+            ProjectSteps projectSteps = new ProjectSteps(Driver);            
             ProjectRepositoryPage projectRepositoryPage = new ProjectRepositoryPage(Driver);
             var uploadFile = "case.json";
             var caseTitle = "Upload";
             var filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Resources", uploadFile);
 
             loginSteps.Login(Configurator.AppSettings.Username, Configurator.AppSettings.Password);
-            projectsPage.ClickCreateProjectButton();
-            projectsPage.SendKeysProjectNameInput("UploadFileTest");
-            projectsPage.ClickCreateProjDialogButton();
-
-            projectRepositoryPage.ClickImportButton();
-            projectRepositoryPage.SendKeysIntoEmailInputField(filePath);
-            projectRepositoryPage.ClickImportTestsButton();
-
+            projectSteps.CreateProject("UploadFileTest");
+            importSteps.ImportCase(filePath);
+           
             Assert.That(projectRepositoryPage.GetUploadCaseText(), Is.EqualTo(caseTitle));
+
+            projectSteps.RemoveProject();
         }
     }
 }

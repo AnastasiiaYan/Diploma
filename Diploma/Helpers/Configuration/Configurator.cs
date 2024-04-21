@@ -5,12 +5,12 @@ namespace Diploma.Helpers.Configuration
 {
     public static class Configurator
     {
-        private static readonly Lazy<IConfiguration> s_configuration;
-        public static IConfiguration Configuration => s_configuration.Value;
+        private static readonly Lazy<IConfiguration> configuration;
+        public static IConfiguration Configuration => configuration.Value;
 
         static Configurator()
         {
-            s_configuration = new Lazy<IConfiguration>(BuildConfiguration);
+            configuration = new Lazy<IConfiguration>(BuildConfiguration);
         }
 
         private static IConfiguration BuildConfiguration()
@@ -38,6 +38,8 @@ namespace Diploma.Helpers.Configuration
                 var child = Configuration.GetSection("AppSettings");
 
                 appSettings.URL = child["URL"];
+                appSettings.URI = child["URI"];
+                appSettings.ApiKey = child["ApiKey"];
                 appSettings.Username = child["Username"];
                 appSettings.Password = child["Password"];
 

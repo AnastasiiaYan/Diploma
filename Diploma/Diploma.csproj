@@ -10,17 +10,38 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="allureConfig.json" />
     <None Remove="appsettings.json" />
+    <None Remove="Resources\case.json" />
+    <None Remove="Resources\chromedriver.exe" />
+    <None Remove="Resources\schema.json" />
+    <None Remove="Resources\UploadFile.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="allureConfig.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\case.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\chromedriver.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\schema.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\UploadFile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Allure.NUnit" Version="2.12.0" />
+    <PackageReference Include="Bogus" Version="35.5.0" />
     <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
     <PackageReference Include="IKVM" Version="8.7.6" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />

@@ -1,5 +1,4 @@
-﻿/* проверка поля для ввода на граничные значения + ввод данных превышающих допустимые */
-using Allure.Net.Commons;
+﻿using Allure.Net.Commons;
 using Allure.NUnit;
 using Allure.NUnit.Attributes;
 using Diploma.Helpers.Configuration;
@@ -8,10 +7,10 @@ using Diploma.Objects.Steps;
 
 namespace Diploma.Tests.UITests
 {
-    [AllureSuite("Проверка поля для ввода на граничные значения + ввод данных превышающих допустимые")]
+    [AllureSubSuite("Проверка поля для ввода на граничные значения + ввод данных превышающих допустимые")]
     internal class BoundaryInputTest : BaseUiTest
     {
-        [Test]
+        [Test(Description = "NotEnoughInputTest")]
         [AllureFeature("Ввод граничного значения минус один")]
         public void NotEnoughInputTest()
         {
@@ -21,6 +20,7 @@ namespace Diploma.Tests.UITests
             var notEnoughPsw = "Qa111111.11";
             var pswConfirmInput = notEnoughPsw;
 
+            AllureApi.Step("Ввод значения Password на 1 символ меньше допустимого");
             createAccounSteps.Registration(newEmail, notEnoughPsw, pswConfirmInput);
 
             Assert.Multiple(() =>
@@ -30,7 +30,7 @@ namespace Diploma.Tests.UITests
             });
         }
 
-        [Test]
+        [Test(Description = "ExactBoundaryInputTest")]
         [AllureFeature("Ввод граничного значения")]
         public void ExactBoundaryInputTest()
         {
@@ -50,14 +50,15 @@ namespace Diploma.Tests.UITests
             });
         }
 
-        [Test]
+        [Test(Description = "ToolargeInputTest")]
         [AllureFeature("Ввод граничного значения плюс один")]
         public void ToolargeInputTest()
         {
             CreateAccounSteps createAccounSteps = new CreateAccounSteps(Driver);
             CreateAccountPage createAccountPage = new CreateAccountPage(Driver);
             var toolargeEmail = "aytestqaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqpqz@gmail.com";// на 1 символ больше допустимого, можно улучшить рандомайзером
-
+            
+            AllureApi.Step("Ввод значения Email на 1 символ больше допустимого");
             createAccounSteps.Registration (toolargeEmail, Configurator.AppSettings.Password, Configurator.AppSettings.Password);   
 
             Assert.Multiple(() =>

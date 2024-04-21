@@ -1,28 +1,30 @@
-﻿/* тест на удаление сущности */
-
+﻿using Allure.NUnit.Attributes;
+using Diploma.Core;
+using Diploma.Helpers;
 using Diploma.Helpers.Configuration;
 using Diploma.Objects.Pages;
 using Diploma.Objects.Steps;
-using OpenQA.Selenium;
+
 
 namespace Diploma.Tests.UITests
-{
+{   
     public class RemoveEntityTest : BaseUiTest
-    {
+    {               
+
         [Test]
+        [AllureFeature("Удаление сущности: проект"), Order(7), Retry(2)]
+        [AllureSeverity(Allure.Net.Commons.SeverityLevel.normal)]
         public void RemoveProjectTest()
         {
             LoginSteps loginSteps = new LoginSteps(Driver);
+            ProjectSteps projectSteps = new ProjectSteps(Driver);
             ProjectsPage projectsPage = new ProjectsPage(Driver);
                         
             loginSteps.Login(Configurator.AppSettings.Username, Configurator.AppSettings.Password);
+            projectSteps.CreateProjectAddGoToProjectsPage("TOREMOVE");
+            projectSteps.RemoveProject();
 
-            projectsPage.IsProjectExist();//переписать 
-            projectsPage.ClickProjectBreadcrumbs();
-            projectsPage.ClickRemoveProjectButton();
-            projectsPage.ClickDeleteProjectButton();
-
-            Assert.That(!projectsPage.IsProjectExist());//переписать            
+            Assert.IsFalse(projectsPage.IsProjectExist());          
         }
     }
 }

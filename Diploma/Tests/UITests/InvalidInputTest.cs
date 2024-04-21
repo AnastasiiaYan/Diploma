@@ -1,6 +1,4 @@
-﻿/* использование некорректных данных */
-
-using Allure.NUnit.Attributes;
+﻿using Allure.NUnit.Attributes;
 using Diploma.Helpers.Configuration;
 using Diploma.Objects.Pages;
 using Diploma.Objects.Steps;
@@ -11,6 +9,7 @@ namespace Diploma.Tests.UITests
     {
         [Test]
         [AllureFeature("Ввод некорректных данных при авторизации")]
+        [AllureSeverity(Allure.Net.Commons.SeverityLevel.critical)]
         public void InvalidLoginTest()
         {
             LoginSteps loginSteps = new LoginSteps(Driver);
