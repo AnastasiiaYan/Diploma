@@ -14,22 +14,20 @@ namespace Diploma.Tests.UITests
         {
 
             LoginSteps loginSteps = new LoginSteps(Driver);
-            ProjectsPage projectsPage = new ProjectsPage(Driver);
+            ImportSteps importSteps = new ImportSteps(Driver);
+            ProjectSteps projectSteps = new ProjectSteps(Driver);            
             ProjectRepositoryPage projectRepositoryPage = new ProjectRepositoryPage(Driver);
             var uploadFile = "case.json";
             var caseTitle = "Upload";
             var filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Resources", uploadFile);
 
             loginSteps.Login(Configurator.AppSettings.Username, Configurator.AppSettings.Password);
-            projectsPage.ClickCreateProjectButton();
-            projectsPage.SendKeysProjectNameInput("UploadFileTest");
-            projectsPage.ClickCreateProjDialogButton();
-
-            projectRepositoryPage.ClickImportButton();
-            projectRepositoryPage.SendKeysIntoEmailInputField(filePath);
-            projectRepositoryPage.ClickImportTestsButton();
-
+            projectSteps.CreateProject("UploadFileTest");
+            importSteps.ImportCase(filePath);
+           
             Assert.That(projectRepositoryPage.GetUploadCaseText(), Is.EqualTo(caseTitle));
+
+            projectSteps.RemoveProject();
         }
     }
 }

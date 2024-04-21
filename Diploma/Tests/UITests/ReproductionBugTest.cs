@@ -17,20 +17,16 @@ namespace Diploma.Tests.UITests
         public void ReproductionImportBugTest()
         {
             LoginSteps loginSteps = new LoginSteps(Driver);
-            ProjectsPage projectsPage = new ProjectsPage(Driver);
+            ImportSteps importSteps = new ImportSteps(Driver);
+            ProjectSteps projectSteps = new ProjectSteps(Driver);
             ProjectRepositoryPage projectRepositoryPage = new ProjectRepositoryPage(Driver);
             var uploadFile = "schema.json";
             var filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Resources", uploadFile);
 
-            loginSteps.Login(Configurator.AppSettings.Username, Configurator.AppSettings.Password);
-            projectsPage.ClickCreateProjectButton();
-            projectsPage.SendKeysProjectNameInput("ReproductionImportBugTest");
-            projectsPage.ClickCreateProjDialogButton();
-                       
-            projectRepositoryPage.ClickImportButton();  
-            projectRepositoryPage.SendKeysIntoEmailInputField(filePath);
-            projectRepositoryPage.ClickImportTestsButton();
-            
+            loginSteps.Login(Configurator.AppSettings.Username, Configurator.AppSettings.Password);            
+            projectSteps.CreateProject("ReproductionImportBugTest");
+            importSteps.ImportCase(filePath);
+
             Assert.That(projectRepositoryPage.GetImportErrorMessageText(), Is.EqualTo("Unable to import file. Invalid file structure"));
         }
     }
