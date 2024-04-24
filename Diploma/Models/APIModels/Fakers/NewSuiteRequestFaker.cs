@@ -1,6 +1,7 @@
 ﻿using Bogus;
+using Diploma.Models.APIModels;
 
-namespace Diploma.Models.Fakers
+namespace Diploma.Models.APIModels.Fakers
 {
     public sealed class NewSuiteRequestFaker : Faker<NewSuiteRequest>
     {

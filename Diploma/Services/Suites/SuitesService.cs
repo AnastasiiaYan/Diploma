@@ -1,5 +1,5 @@
 ﻿using Diploma.Core.Clients;
-using Diploma.Models;
+using Diploma.Models.APIModels;
 using RestSharp;
 
 namespace Diploma.Services.Projects

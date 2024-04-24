@@ -1,6 +1,7 @@
 ﻿using Bogus;
 using Diploma.Models;
-using Diploma.Models.Fakers;
+using Diploma.Models.APIModels;
+using Diploma.Models.APIModels.Fakers;
 
 namespace Diploma.Tests.APITests
 {

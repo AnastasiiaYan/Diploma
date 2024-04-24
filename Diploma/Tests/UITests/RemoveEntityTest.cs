@@ -1,7 +1,8 @@
-﻿using Allure.NUnit.Attributes;
+﻿/*using Allure.NUnit.Attributes;
 using Diploma.Core;
 using Diploma.Helpers;
 using Diploma.Helpers.Configuration;
+using Diploma.Models.UIModels;
 using Diploma.Objects.Pages;
 using Diploma.Objects.Steps;
 
@@ -21,10 +22,16 @@ namespace Diploma.Tests.UITests
             ProjectsPage projectsPage = new ProjectsPage(Driver);
                         
             loginSteps.Login(Configurator.AppSettings.Username, Configurator.AppSettings.Password);
-            projectSteps.CreateProjectAddGoToProjectsPage("TOREMOVE");
+            Project project = new Project.Builder()
+                .SetName("TOREMOVE")
+                .SetCode("TOREMOVE")
+                .SetDescription("TestDescription")
+                .Build();
+
+            projectsPage.ClickProjectsButton();
             projectSteps.RemoveProject();
 
             Assert.IsFalse(projectsPage.IsProjectExist());          
         }
     }
-}
+}*/

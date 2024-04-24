@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 
-namespace Diploma.Models
+namespace Diploma.Models.APIModels
 {
     public record NewSuiteResponse
     {

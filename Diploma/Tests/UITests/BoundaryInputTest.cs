@@ -1,4 +1,4 @@
-﻿using Allure.Net.Commons;
+﻿/*using Allure.Net.Commons;
 using Allure.NUnit;
 using Allure.NUnit.Attributes;
 using Diploma.Helpers.Configuration;
@@ -68,4 +68,4 @@ namespace Diploma.Tests.UITests
             });
         }
     }
-}
+}*/

@@ -9,7 +9,7 @@ using Allure.NUnit.Attributes;
 
 namespace Diploma.Tests.UITests
 {
-    [Parallelizable(scope: ParallelScope.All)]
+    [Parallelizable(scope: ParallelScope.Fixtures)]
     [FixtureLifeCycle(LifeCycle.InstancePerTestCase)]
     [AllureNUnit][AllureOwner("A.SAMOYLOVA")]
     public class BaseUiTest
