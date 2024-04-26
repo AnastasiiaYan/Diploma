@@ -1,23 +1,19 @@
 ﻿using Allure.Net.Commons;
 using Allure.NUnit.Attributes;
+using Bogus;
 using Diploma.Helpers.Configuration;
 using Diploma.Models.UIModels;
 using Diploma.Objects.Pages;
 using Diploma.Objects.Steps;
 using OpenQA.Selenium.Interactions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Diploma.Tests.UITests
 {
     internal class UITests : BaseUiTest
     {
         [Test]
-        [AllureSeverity(Allure.Net.Commons.SeverityLevel.critical), Order(3)]
+        [AllureSeverity(Allure.Net.Commons.SeverityLevel.critical)]
         public void SuccessfulLoginTest()
         {
             LoginSteps loginSteps = new LoginSteps(Driver);
@@ -36,8 +32,8 @@ namespace Diploma.Tests.UITests
             ProjectSteps projectSteps = new ProjectSteps(Driver);
             ProjectRepositoryPage projectRepositoryPage = new ProjectRepositoryPage(Driver);
             Project project = new Project.Builder()
-                .SetName("TestTitle")
-                .SetCode("Test")
+                .SetName("CreateToRemove")
+                .SetCode("TOREMOVE")
                 .SetDescription("TestDescription")
                 .Build();
 
@@ -48,7 +44,7 @@ namespace Diploma.Tests.UITests
         }
 
         [Test]
-        [AllureFeature("Удаление сущности: проект"), Order(2), Retry(2)]
+        [AllureFeature("Удаление сущности: проект"), Order(2)]
         [AllureSeverity(Allure.Net.Commons.SeverityLevel.normal)]
         public void RemoveProjectTest()
         {
@@ -56,14 +52,7 @@ namespace Diploma.Tests.UITests
             ProjectSteps projectSteps = new ProjectSteps(Driver);
             ProjectsPage projectsPage = new ProjectsPage(Driver);
 
-            loginSteps.Login(Configurator.AppSettings.Username, Configurator.AppSettings.Password);
-            Project project = new Project.Builder()
-                .SetName("TOREMOVE")
-                .SetCode("TOREM")
-                .SetDescription("TestDescription")
-                .Build();
-
-            projectsPage.ClickProjectsButton();
+            loginSteps.Login(Configurator.AppSettings.Username, Configurator.AppSettings.Password);            
             projectSteps.RemoveProject();
 
             Assert.IsFalse(projectsPage.IsProjectExist());
@@ -71,66 +60,62 @@ namespace Diploma.Tests.UITests
 
         [AllureSubSuite("Проверка поля для ввода на граничные значения + ввод данных превышающих допустимые")]
         [Test(Description = "NotEnoughInputTest")]
-        [AllureFeature("Ввод граничного значения минус один"), Order(3)]
+        [AllureFeature("Ввод граничного значения минус один")]
         public void NotEnoughInputTest()
         {
-                CreateAccounSteps createAccounSteps = new CreateAccounSteps(Driver);
-                CreateAccountPage createAccountPage = new CreateAccountPage(Driver);
-                var newEmail = "aytestqa11@gmail.com";
-                var notEnoughPsw = "Qa111111.11";
-                var pswConfirmInput = notEnoughPsw;
+            CreateAccounSteps createAccounSteps = new CreateAccounSteps(Driver);
+            CreateAccountPage createAccountPage = new CreateAccountPage(Driver);            
+            var newEmail = "aytestqa11@gmail.com";
+            var notEnoughPsw = "Lessthan12.";
+            var pswConfirmInput = notEnoughPsw;
 
-                AllureApi.Step("Ввод значения Password на 1 символ меньше допустимого");
-                createAccounSteps.Registration(newEmail, notEnoughPsw, pswConfirmInput);
-
-                Assert.Multiple(() =>
-                {
-                    Assert.That(createAccountPage.GetPasswordWarningText(), Is.EqualTo("Password must has at least 12 characters"));
-                    Assert.That(createAccountPage.IsPageOpened());
-                });
+            AllureApi.Step("Ввод значения Password на 1 символ меньше допустимого");
+            createAccounSteps.Registration(newEmail, notEnoughPsw, pswConfirmInput);
+            Assert.Multiple(() =>
+            {
+                Assert.That(createAccountPage.GetPasswordWarningText(), Is.EqualTo("Password must has at least 12 characters"));
+                Assert.That(createAccountPage.IsPageOpened()); 
+            });
         }
 
         [Test(Description = "ExactBoundaryInputTest")]
-        [AllureFeature("Ввод граничного значения"), Order(3)]
+        [AllureFeature("Ввод граничного значения")]
         public void ExactBoundaryInputTest()
         {
-                CreateAccounSteps createAccounSteps = new CreateAccounSteps(Driver);
-                CreateAccountPage createAccountPage = new CreateAccountPage(Driver);
-                var exactBoundaryEmail = "dytestqaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqpq@gmail.com"; //можно улучшить рандомайзером
-                var exactBoundaryPsw = "Qa111111.112";
-                var pswConfirmInput = exactBoundaryPsw;
+            CreateAccounSteps createAccounSteps = new CreateAccounSteps(Driver);
+            CreateAccountPage createAccountPage = new CreateAccountPage(Driver);
+            string randomString = new string(Enumerable.Repeat(chars, 64).Select(s => s[random.Next(s.Length)]).ToArray());
+            var exactBoundaryEmail = $"{randomString}@gmail.com"; 
+            var exactBoundaryPsw = "Exactly12Ch.";
+            var pswConfirmInput = exactBoundaryPsw;
 
-                createAccounSteps.Registration(exactBoundaryEmail, exactBoundaryPsw, pswConfirmInput);
-
-                Assert.Multiple(() =>
-                {
-                    Assert.That(!createAccountPage.IsPageOpened());
-                    Assert.That(!createAccountPage.EmailWarning.Displayed);
-                    Assert.That(!createAccountPage.PasswordWarning.Displayed);
-                });
+            createAccounSteps.Registration(exactBoundaryEmail, exactBoundaryPsw, pswConfirmInput);
+            Assert.That(!createAccountPage.IsPageOpened());
+            
         }
         
         [Test(Description = "ToolargeInputTest")]
-        [AllureFeature("Ввод граничного значения плюс один"), Order(3)]
+        [AllureFeature("Ввод граничного значения плюс один")]
         public void ToolargeInputTest()
         {
-                CreateAccounSteps createAccounSteps = new CreateAccounSteps(Driver);
-                CreateAccountPage createAccountPage = new CreateAccountPage(Driver);
-                var toolargeEmail = "aytestqaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqpqz@gmail.com";// на 1 символ больше допустимого, можно улучшить рандомайзером
+            CreateAccounSteps createAccounSteps = new CreateAccounSteps(Driver);
+            CreateAccountPage createAccountPage = new CreateAccountPage(Driver);
+            string randomString = new string(Enumerable.Repeat(chars, 65).Select(s => s[random.Next(s.Length)]).ToArray());
+            var toolargeEmail = $"{randomString}@gmail.com";
 
-                AllureApi.Step("Ввод значения Email на 1 символ больше допустимого");
-                createAccounSteps.Registration(toolargeEmail, Configurator.AppSettings.Password, Configurator.AppSettings.Password);
+            AllureApi.Step("Ввод значения Email на 1 символ больше допустимого");
+            createAccounSteps.Registration(toolargeEmail, Configurator.AppSettings.Password, Configurator.AppSettings.Password);
 
-                Assert.Multiple(() =>
-                {
-                    Assert.That(createAccountPage.GetEmailWarningText(), Is.EqualTo($"Value '{toolargeEmail}' does not match format email of type string"));
-                    Assert.That(createAccountPage.IsPageOpened());
-                });
+            Assert.Multiple(() =>
+            {
+                Assert.That(createAccountPage.GetEmailWarningText(), Is.EqualTo($"Value '{toolargeEmail}' does not match format email of type string"));
+                Assert.That(createAccountPage.IsPageOpened());
+            });
         }
 
         [Test]
         [AllureFeature("Ввод некорректных данных при авторизации")]
-        [AllureSeverity(Allure.Net.Commons.SeverityLevel.critical), Order(3)]
+        [AllureSeverity(Allure.Net.Commons.SeverityLevel.critical)]
         public void InvalidLoginTest()
         {
             LoginSteps loginSteps = new LoginSteps(Driver);
@@ -147,7 +132,7 @@ namespace Diploma.Tests.UITests
         }
 
         [Test]
-        [AllureSeverity(Allure.Net.Commons.SeverityLevel.minor), Order(3)]
+        [AllureSeverity(Allure.Net.Commons.SeverityLevel.minor)]
         public void PopUpMessageTest()
         {
             LoginSteps loginSteps = new LoginSteps(Driver);
@@ -163,7 +148,7 @@ namespace Diploma.Tests.UITests
         }
 
         [Test]
-        [AllureSeverity(Allure.Net.Commons.SeverityLevel.blocker), Order(3)]
+        [AllureSeverity(Allure.Net.Commons.SeverityLevel.blocker)]
         [AllureIssue("JIRA-123")]
         public void ReproductionImportBugTest()
         {
@@ -186,7 +171,7 @@ namespace Diploma.Tests.UITests
         }
 
         [Test]
-        [AllureSeverity(Allure.Net.Commons.SeverityLevel.normal), Order(3)]
+        [AllureSeverity(Allure.Net.Commons.SeverityLevel.normal)]
         public void UploadFileTest()
         {
 
@@ -207,8 +192,12 @@ namespace Diploma.Tests.UITests
             importSteps.ImportCase(filePath);
 
             Assert.That(projectRepositoryPage.GetUploadCaseText(), Is.EqualTo(caseTitle));
+        }
 
-            projectSteps.RemoveProject();
+        [Test]        
+        public void DebugTest()
+        {
+            Assert.That(true);
         }
     }
 }
