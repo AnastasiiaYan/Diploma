@@ -19,6 +19,15 @@ public class BaseApiTest
     [OneTimeTearDown]
     public void TearDown()
     {
+        var allProjectEntity = ProjectsService.GetAllProjects().Result.Result.ProjectEntities;
+        if (allProjectEntity.Count > 0)
+        {
+            foreach (var entity in allProjectEntity)
+            {
+                ProjectsService.DeleteProjectByCode(entity.Code);
+                Thread.Sleep(1000);
+            }
+        }
         ProjectsService.Dispose();
         SuitesService.Dispose();
     }
