@@ -1,4 +1,5 @@
 ﻿using Diploma.Models;
+using Diploma.Models.APIModels;
 
 namespace Diploma.Services.Projects
 {
@@ -9,5 +10,9 @@ namespace Diploma.Services.Projects
         Task<ProjectResponse> GetProjectByCode(string code);
 
         Task<ErrorResponse> GetProjectByNonExistingCode(string nonExistingCode);
+
+        Task<AllProjectsResponse> GetAllProjects();
+
+        Task<DeleteProjectResponse> DeleteProjectByCode(string projectCode);
     }
 }

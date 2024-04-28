@@ -16,12 +16,13 @@ namespace Diploma.Objects.Steps
         }
 
         [AllureStep]
-        public void Registration(string email, string password, string passwordConfirmation)
+        public void Registration(User newUser)
         {
             startPage.ClickCreateAccountButton();
-            createAccountPage.SendKeysIntoEmailInputField(email);
-            createAccountPage.SendKeysIntoPasswordInputField(password);
-            createAccountPage.SendKeysIntoPasswordConfirmationField(passwordConfirmation);
+            createAccountPage.SendKeysIntoEmailInputField(newUser.GetUsername());
+            createAccountPage.SendKeysIntoPasswordInputField(newUser.GetPassword());
+            createAccountPage.SendKeysIntoPasswordConfirmationField(newUser.GetPassword());
+            _logger.Debug("Заполнены поля \"Work email\", \"Password\", \"Password confirmation\" для регистрации нового пользователя");
             createAccountPage.ClickOnSubmitButton();
         }
     }

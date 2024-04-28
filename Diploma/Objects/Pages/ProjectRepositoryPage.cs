@@ -1,10 +1,4 @@
 ﻿using OpenQA.Selenium;
-using SeleniumExtras.WaitHelpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Diploma.Objects.Pages
 {
@@ -32,6 +26,14 @@ namespace Diploma.Objects.Pages
         public string GetHeaderElementText() => HeaderElement.Text;
         public string GetImportErrorMessageText() => ImportErrorMessage.Text;        
         public string GetUploadCaseText() => UploadCase.Text;
-        public override bool IsPageOpened() => HeaderElement.Displayed;        
+        public override bool IsPageOpened() 
+        {
+            if (HeaderElement.Displayed)
+            {
+                _logger.Debug("Открыт репозиторий проекта");
+                return true;
+            }
+            return false;
+        }
     }
 }

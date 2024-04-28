@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Diploma.Models
+namespace Diploma.Models.APIModels
 {
     public record AllSuitesResponse
     {

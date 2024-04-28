@@ -1,4 +1,4 @@
-﻿using Diploma.Models;
+﻿using Diploma.Models.APIModels;
 
 namespace Diploma.Services.Projects
 {

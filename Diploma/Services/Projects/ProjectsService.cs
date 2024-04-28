@@ -1,5 +1,6 @@
 ﻿using Diploma.Core.Clients;
 using Diploma.Models;
+using Diploma.Models.APIModels;
 using RestSharp;
 
 namespace Diploma.Services.Projects
@@ -35,6 +36,21 @@ namespace Diploma.Services.Projects
                 .AddUrlSegment("code", nonExistingCode);
 
             return _client.ExecuteAsync<ErrorResponse>(request);
+        }
+
+        public Task<AllProjectsResponse> GetAllProjects()
+        {
+            var request = new RestRequest("/v1/project");
+
+            return _client.ExecuteAsync<AllProjectsResponse>(request);
+        }
+
+        public Task<DeleteProjectResponse> DeleteProjectByCode(string projetCode)
+        {
+            var request = new RestRequest("/v1/project/{code}", Method.Delete)
+                .AddUrlSegment("code", projetCode);
+
+            return _client.ExecuteAsync<DeleteProjectResponse>(request);
         }
 
         public void Dispose()

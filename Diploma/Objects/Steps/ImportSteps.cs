@@ -17,6 +17,7 @@ namespace Diploma.Objects.Steps
         {
             projectRepositoryPage.ClickImportButton();
             projectRepositoryPage.SendKeysIntoEmailInputField(filePath);
+            _logger.Debug("Выполнен выбор файла для загрузки");
             projectRepositoryPage.ClickImportTestsButton();
         }        
     }
