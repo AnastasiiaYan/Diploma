@@ -1,5 +1,6 @@
 ﻿using Diploma.Helpers;
 using OpenQA.Selenium;
+using NLog;
 
 namespace Diploma.Objects.Pages
 {
@@ -30,6 +31,14 @@ namespace Diploma.Objects.Pages
         public string GetPasswordWarningText() => PasswordWarning.Text;
         public string GetEmailWarningText() => EmailWarning.Text;
         public override bool IsPageOpened() => EmailInputField.Displayed && PasswordConfirmationField.Displayed;
-        public  bool IsPageSuccessCreatedOpened() => ResendLink.Displayed;
+        public  bool IsPageSuccessCreatedOpened()
+        { 
+            if (ResendLink.Displayed)
+            {
+                _logger.Debug("Открыта страница успешной регистрации нового пользователя");
+                return true;
+            }       
+            return false;
+        }     
     }
 }

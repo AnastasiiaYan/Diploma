@@ -10,6 +10,7 @@ using OpenQA.Selenium.Interactions;
 
 namespace Diploma.Tests.UITests
 {
+    [TestFixture]
     internal class UITests : BaseUiTest
     {
         Random random = new Random();
@@ -28,8 +29,7 @@ namespace Diploma.Tests.UITests
             Assert.That(projectsPage.IsPageOpened());
         }
         [Test]
-        [AllureFeature("Создание новой сущности: проект"), Order(1)]
-        [AllureSeverity(SeverityLevel.critical)]
+        [AllureFeature("Создание новой сущности: проект"), Order(1), AllureSeverity(SeverityLevel.critical)]
         public void CreateProjectTest()
         {
             LoginSteps loginSteps = new LoginSteps(Driver);
@@ -48,8 +48,7 @@ namespace Diploma.Tests.UITests
         }
 
         [Test]
-        [AllureFeature("Удаление сущности: проект"), Order(2)]
-        [AllureSeverity(SeverityLevel.normal)]
+        [AllureFeature("Удаление сущности: проект"), Order(2), AllureSeverity(SeverityLevel.normal)]
         public void RemoveProjectTest()
         {
             LoginSteps loginSteps = new LoginSteps(Driver);
@@ -63,8 +62,7 @@ namespace Diploma.Tests.UITests
         }
 
         [AllureSubSuite("Проверка поля для ввода на граничные значения")]
-        [Test(Description = "NotEnoughInputTest")]
-        [AllureFeature("Ввод граничного значения минус один")]
+        [Test(Description = "NotEnoughInputTest"), AllureFeature("Ввод граничного значения минус один")]
         public void NotEnoughInputTest()
         {
             CreateAccounSteps createAccounSteps = new CreateAccounSteps(Driver);
@@ -112,8 +110,7 @@ namespace Diploma.Tests.UITests
         }
 
         [Test]
-        [AllureFeature("Ввод некорректных данных при авторизации")]
-        [AllureSeverity(SeverityLevel.critical)]
+        [AllureFeature("Ввод некорректных данных при авторизации"), AllureSeverity(SeverityLevel.critical)]
         public void InvalidLoginTest()
         {
             LoginSteps loginSteps = new LoginSteps(Driver);
@@ -146,8 +143,7 @@ namespace Diploma.Tests.UITests
         }
 
         [Test]
-        [AllureSeverity(SeverityLevel.blocker)]
-        [AllureIssue("JIRA-123")]
+        [AllureSeverity(SeverityLevel.blocker), AllureIssue("JIRA-123")]
         public void ReproductionImportBugTest()
         {
             LoginSteps loginSteps = new LoginSteps(Driver);
@@ -155,7 +151,7 @@ namespace Diploma.Tests.UITests
             ProjectSteps projectSteps = new ProjectSteps(Driver);
             ProjectRepositoryPage projectRepositoryPage = new ProjectRepositoryPage(Driver);
             var uploadFile = "schema.json";
-            var filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Resources", uploadFile); // VO или наверх
+            var filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Resources", uploadFile); 
             Project project = new Project.Builder()
                 .SetName("ReproductionBugTest")
                 .SetCode("Repro")
@@ -179,7 +175,7 @@ namespace Diploma.Tests.UITests
             ProjectRepositoryPage projectRepositoryPage = new ProjectRepositoryPage(Driver);
             var uploadFile = "case.json";
             var caseTitle = "Upload";
-            var filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Resources", uploadFile); // VO или наверх
+            var filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Resources", uploadFile); 
             Project project = new Project.Builder()
                 .SetName("UploadFileTest")
                 .SetCode("Uplo")

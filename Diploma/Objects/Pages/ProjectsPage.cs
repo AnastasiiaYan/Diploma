@@ -45,8 +45,7 @@ namespace Diploma.Objects.Pages
         public void SendKeysProjectNameInput(string input) => ProjectNameInput.SendKeys(input);
         public void SendKeysProjectCodeInput(string input) => ProjectCodeInput.SendKeys(input);
         public void SendKeysProjectDescriptionInput(string input) => ProjectDescriptionInput.SendKeys(input);
-        public void ClearProjectCodeInput() => ProjectCodeInput.Clear();
-        public override bool IsPageOpened() => CreateProjectButton.Displayed;
+        public void ClearProjectCodeInput() => ProjectCodeInput.Clear();        
         public string GetMessageElementText() => MessageElement.Text;
         public bool IsProjectExist()
         {
@@ -56,5 +55,14 @@ namespace Diploma.Objects.Pages
             else return true;
         }
         public void ClickProjectsButton() => ProjectsButton.Click();
+        public override bool IsPageOpened()
+        {
+            if (CreateProjectButton.Displayed)
+            {
+                _logger.Debug("Открыта страница со списком проектов");
+                return true;
+            }
+            return false;
+        }
     }
 }

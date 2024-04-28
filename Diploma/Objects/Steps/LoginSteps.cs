@@ -21,6 +21,7 @@ namespace Diploma.Objects.Steps
             startPage.ClickOnSignInButton();
             loginPage.SendKeysIntoEmailInputField(user.GetUsername());
             loginPage.SendKeysIntoPasswordInputField(user.GetPassword());
+            _logger.Debug("Выполнено заполнение полей \"Work email\", \"Password\"");
             loginPage.ClickOnSubmitButton();
         }
     }

@@ -23,7 +23,8 @@ namespace Diploma.Objects.Steps
             projectsPage.SendKeysProjectCodeInput(project.Code);
             projectsPage.SendKeysProjectDescriptionInput(project.Description ?? "");
             projectsPage.ClickCreateProjDialogButton();
-        }        
+            _logger.Debug("Выполнен клик по \"CreateProject\" для создания нового проекта");
+        }
 
         [AllureStep]
         public void RemoveProject()
@@ -33,6 +34,7 @@ namespace Diploma.Objects.Steps
             projectsPage.ClickRemoveProjectButton();
             projectsPage.ClickDeleteProjectButton();
             Driver.Navigate().Refresh();
+            _logger.Debug("Выполнено удаление проекта и обновление страницы");
         }
     }
 }

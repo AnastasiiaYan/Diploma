@@ -6,6 +6,8 @@ using Diploma.Core.Clients;
 using Diploma.Helpers;
 using Diploma.Helpers.Configuration;
 using Diploma.Services.Projects;
+using NLog;
+using NLog.Fluent;
 using NUnit.Allure.Core;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
@@ -14,17 +16,17 @@ namespace Diploma.Tests.UITests
 {
     [Parallelizable(scope: ParallelScope.All)]
     [FixtureLifeCycle(LifeCycle.InstancePerTestCase)]
-    [AllureNUnit]
-    [AllureOwner("A.SAMOYLOVA")]
+    [AllureNUnit, AllureOwner("A.SAMOYLOVA")]
     public class BaseUiTest
     {
         protected IWebDriver Driver { get; set; }
         protected WaitsHelper WaitsHelper { get; private set; }
         protected static ProjectsService ProjectsService { get; set; }
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         [OneTimeSetUp]
         public static void GlobalSetup()
-        {
+        {            
             AllureLifecycle.Instance.CleanupResultDirectory();
         }
 
@@ -32,7 +34,7 @@ namespace Diploma.Tests.UITests
         public void Setup()
         {
             Driver = new Browser().Driver;
-            WaitsHelper = new WaitsHelper(Driver, TimeSpan.FromSeconds(Configurator.WaitsTimeout));
+            WaitsHelper = new WaitsHelper(Driver, TimeSpan.FromSeconds(Configurator.WaitsTimeout));            
         }
 
         [TearDown]
@@ -58,7 +60,7 @@ namespace Diploma.Tests.UITests
 
             finally
             {
-                Driver.Quit();
+                Driver.Quit();                
             }
         }
         [OneTimeTearDown]
@@ -66,12 +68,14 @@ namespace Diploma.Tests.UITests
         {
             ProjectsService = new ProjectsService(new ApiRestClient());
             var allProjectEntity = ProjectsService.GetAllProjects().Result.Result.ProjectEntities;
+            _logger.Debug("Настройка аккаунта после выполнения тестов");
             if (allProjectEntity.Count > 0)
             {
                 foreach (var entity in allProjectEntity)
                 {
                     ProjectsService.DeleteProjectByCode(entity.Code);
                     Thread.Sleep(1000);
+                    _logger.Debug($"Выполнено удаление проекта {entity.Code}");
                 }
             }
         }

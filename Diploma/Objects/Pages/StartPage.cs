@@ -14,7 +14,15 @@ namespace Diploma.Objects.Pages
         public IWebElement CreateAccountButton => WaitsHelper.WaitForExists(createAccountButton);
 
         public void ClickOnSignInButton() => SignInButton.Click();
-        public void ClickCreateAccountButton() => CreateAccountButton.Click();
-        public override bool IsPageOpened() => SignInButton.Displayed;        
+        public void ClickCreateAccountButton() => CreateAccountButton.Click();        
+        public override bool IsPageOpened()
+        {
+            if (SignInButton.Displayed)
+            {
+                _logger.Debug("Стартовая страница Gase.io открыта");
+                return true;
+            }
+            return false;
+        }
     }
 }

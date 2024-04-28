@@ -21,7 +21,8 @@ namespace Diploma.Objects.Steps
             startPage.ClickCreateAccountButton();
             createAccountPage.SendKeysIntoEmailInputField(newUser.GetUsername());
             createAccountPage.SendKeysIntoPasswordInputField(newUser.GetPassword());
-            createAccountPage.SendKeysIntoPasswordConfirmationField(newUser.GetPswConfirm());
+            createAccountPage.SendKeysIntoPasswordConfirmationField(newUser.GetPassword());
+            _logger.Debug("Заполнены поля \"Work email\", \"Password\", \"Password confirmation\" для регистрации нового пользователя");
             createAccountPage.ClickOnSubmitButton();
         }
     }
