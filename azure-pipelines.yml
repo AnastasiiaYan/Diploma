@@ -4,21 +4,23 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-- azure-pipelines
+- feature4
 
 pool: myLocalPool
 # vmImage: 'windows-latest'
 
 variables:
-  solution: '**\*.sln'
+  solution: '**/*.sln'
   buildPlatform: 'Any CPU'
-  buildConfiguration: 'Debug'
+  buildConfiguration: 'Release'
 
 steps:
 - task: NuGetToolInstaller@1
+
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
