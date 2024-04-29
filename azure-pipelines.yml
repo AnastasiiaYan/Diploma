@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-- feature4
+- dev
 
 pool: myLocalPool
 # vmImage: 'windows-latest'
@@ -25,3 +25,14 @@ steps:
   inputs:
     command: 'test'
     projects: 'Diploma\Diploma.csproj'
+
+- task: PublishAllureReport@1
+  displayName: Publish Report
+  inputs:
+    allureVersion: 2.27.0
+    testResultsDir: Diploma\bin\Debug\net8.0\allure-results
+    
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)'
+    publishLocation: 'pipeline'
