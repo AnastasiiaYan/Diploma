@@ -7,14 +7,12 @@ using Diploma.Helpers;
 using Diploma.Helpers.Configuration;
 using Diploma.Services.Projects;
 using NLog;
-using NLog.Fluent;
 using NUnit.Allure.Core;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 
 namespace Diploma.Tests.UITests
-{
-    [Parallelizable(scope: ParallelScope.All)]
+{    
     [FixtureLifeCycle(LifeCycle.InstancePerTestCase)]
     [AllureNUnit, AllureOwner("A.SAMOYLOVA")]
     public class BaseUiTest

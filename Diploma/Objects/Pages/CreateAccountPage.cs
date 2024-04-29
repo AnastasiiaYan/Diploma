@@ -1,6 +1,5 @@
 ﻿using Diploma.Helpers;
 using OpenQA.Selenium;
-using NLog;
 
 namespace Diploma.Objects.Pages
 {

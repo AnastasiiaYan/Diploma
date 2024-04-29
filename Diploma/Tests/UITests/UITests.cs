@@ -19,6 +19,7 @@ namespace Diploma.Tests.UITests
 
         [Test]
         [AllureSeverity(SeverityLevel.critical)]
+        [Parallelizable(scope: ParallelScope.Self)]
         public void SuccessfulLoginTest()
         {
             LoginSteps loginSteps = new LoginSteps(Driver);
@@ -63,6 +64,7 @@ namespace Diploma.Tests.UITests
 
         [AllureSubSuite("Проверка поля для ввода на граничные значения")]
         [Test(Description = "NotEnoughInputTest"), AllureFeature("Ввод граничного значения минус один")]
+        [Parallelizable(scope: ParallelScope.Self)]
         public void NotEnoughInputTest()
         {
             CreateAccounSteps createAccounSteps = new CreateAccounSteps(Driver);
@@ -77,9 +79,11 @@ namespace Diploma.Tests.UITests
                 Assert.That(createAccountPage.IsPageOpened());
             });
         }
-
+        
+        [AllureSubSuite("Проверка поля для ввода на граничные значения")]
         [Test(Description = "ExactBoundaryInputTest")]
         [AllureFeature("Ввод граничного значения")]
+        [Parallelizable(scope: ParallelScope.Self)]
         public void ExactBoundaryInputTest()
         {
             CreateAccounSteps createAccounSteps = new CreateAccounSteps(Driver);
@@ -92,8 +96,10 @@ namespace Diploma.Tests.UITests
             Assert.That(createAccountPage.IsPageSuccessCreatedOpened());
         }
 
+        [AllureSubSuite("Проверка поля для ввода на граничные значения")]
         [Test(Description = "ToolargeInputTest")]
         [AllureFeature("Ввод граничного значения плюс один")]
+        [Parallelizable(scope: ParallelScope.Self)]
         public void ToolargeInputTest()
         {
             CreateAccounSteps createAccounSteps = new CreateAccounSteps(Driver);
@@ -111,6 +117,7 @@ namespace Diploma.Tests.UITests
 
         [Test]
         [AllureFeature("Ввод некорректных данных при авторизации"), AllureSeverity(SeverityLevel.critical)]
+        [Parallelizable(scope: ParallelScope.Self)]
         public void InvalidLoginTest()
         {
             LoginSteps loginSteps = new LoginSteps(Driver);
@@ -128,6 +135,7 @@ namespace Diploma.Tests.UITests
 
         [Test]
         [AllureSeverity(SeverityLevel.minor)]
+        [Parallelizable(scope: ParallelScope.Self)]
         public void PopUpMessageTest()
         {
             LoginSteps loginSteps = new LoginSteps(Driver);
@@ -144,6 +152,7 @@ namespace Diploma.Tests.UITests
 
         [Test]
         [AllureSeverity(SeverityLevel.blocker), AllureIssue("JIRA-123")]
+        [Parallelizable(scope: ParallelScope.Self)]
         public void ReproductionImportBugTest()
         {
             LoginSteps loginSteps = new LoginSteps(Driver);
@@ -166,6 +175,7 @@ namespace Diploma.Tests.UITests
 
         [Test]
         [AllureSeverity(SeverityLevel.normal)]
+        [Parallelizable(scope: ParallelScope.Self)]
         public void UploadFileTest()
         {
 

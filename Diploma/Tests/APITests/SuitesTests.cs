@@ -1,5 +1,4 @@
 ﻿using Bogus;
-using Diploma.Models;
 using Diploma.Models.APIModels;
 using Diploma.Models.APIModels.Fakers;
 

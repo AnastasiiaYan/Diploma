@@ -1,6 +1,4 @@
-﻿using sun.security.util;
-
-namespace Diploma.Objects
+﻿namespace Diploma.Objects
 {
     public class User
     {
