@@ -23,8 +23,8 @@ namespace Diploma.Tests.UITests
         {
             LoginSteps loginSteps = new LoginSteps(Driver);
             ProjectsPage projectsPage = new ProjectsPage(Driver);
-           
-            loginSteps.Login(user); 
+
+            loginSteps.Login(user);
 
             Assert.That(projectsPage.IsPageOpened());
         }
@@ -66,10 +66,10 @@ namespace Diploma.Tests.UITests
         public void NotEnoughInputTest()
         {
             CreateAccounSteps createAccounSteps = new CreateAccounSteps(Driver);
-            CreateAccountPage createAccountPage = new CreateAccountPage(Driver);            
+            CreateAccountPage createAccountPage = new CreateAccountPage(Driver);
             User newUser = new User("createNewUser@gmail.com", "Lessthan12.");
 
-            createAccounSteps.Registration(newUser); 
+            createAccounSteps.Registration(newUser);
 
             Assert.Multiple(() =>
             {
@@ -84,10 +84,10 @@ namespace Diploma.Tests.UITests
         {
             CreateAccounSteps createAccounSteps = new CreateAccounSteps(Driver);
             CreateAccountPage createAccountPage = new CreateAccountPage(Driver);
-            string exactRandStr = new string(Enumerable.Repeat(chars, 64).Select(s => s[random.Next(s.Length)]).ToArray());                      
+            string exactRandStr = new string(Enumerable.Repeat(chars, 64).Select(s => s[random.Next(s.Length)]).ToArray());
             User newUser = new User($"{exactRandStr}@gmail.com", "Exactly12Ch.");
 
-            createAccounSteps.Registration(newUser); 
+            createAccounSteps.Registration(newUser);
 
             Assert.That(createAccountPage.IsPageSuccessCreatedOpened());
         }
@@ -98,13 +98,13 @@ namespace Diploma.Tests.UITests
         {
             CreateAccounSteps createAccounSteps = new CreateAccounSteps(Driver);
             CreateAccountPage createAccountPage = new CreateAccountPage(Driver);
-            string tooLargeRandStr = new string(Enumerable.Repeat(chars, 65).Select(s => s[random.Next(s.Length)]).ToArray());            
+            string tooLargeRandStr = new string(Enumerable.Repeat(chars, 65).Select(s => s[random.Next(s.Length)]).ToArray());
             User newUser = new User($"{tooLargeRandStr}@gmail.com", "Exactly12Ch.");
-            createAccounSteps.Registration(newUser); 
+            createAccounSteps.Registration(newUser);
 
             Assert.Multiple(() =>
             {
-                Assert.That(createAccountPage.GetEmailWarningText(), Is.EqualTo($"Value '{tooLargeRandStr}'@gmail.com does not match format email of type string"));
+                Assert.That(createAccountPage.GetEmailWarningText(), Is.EqualTo($"Value '{tooLargeRandStr}@gmail.com' does not match format email of type string"));
                 Assert.That(createAccountPage.IsPageOpened());
             });
         }
@@ -116,8 +116,8 @@ namespace Diploma.Tests.UITests
             LoginSteps loginSteps = new LoginSteps(Driver);
             LoginPage loginPage = new LoginPage(Driver);
             User invalidPswUser = new User(Configurator.AppSettings.Username, "invalidPassword");
-            
-            loginSteps.Login(invalidPswUser);            
+
+            loginSteps.Login(invalidPswUser);
 
             Assert.Multiple(() =>
             {
@@ -135,7 +135,7 @@ namespace Diploma.Tests.UITests
             Actions action = new Actions(Driver);
             var expectedMessage = "Notifications";
 
-            loginSteps.Login(user); 
+            loginSteps.Login(user);
             var actualMessage = projectsPage.MessageElement.GetAttribute("aria-label");
             action.MoveToElement(projectsPage.MessageElement, 5, 5).Build().Perform();
 
@@ -151,7 +151,7 @@ namespace Diploma.Tests.UITests
             ProjectSteps projectSteps = new ProjectSteps(Driver);
             ProjectRepositoryPage projectRepositoryPage = new ProjectRepositoryPage(Driver);
             var uploadFile = "schema.json";
-            var filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Resources", uploadFile); 
+            var filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Resources", uploadFile);
             Project project = new Project.Builder()
                 .SetName("ReproductionBugTest")
                 .SetCode("Repro")
@@ -175,7 +175,7 @@ namespace Diploma.Tests.UITests
             ProjectRepositoryPage projectRepositoryPage = new ProjectRepositoryPage(Driver);
             var uploadFile = "case.json";
             var caseTitle = "Upload";
-            var filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Resources", uploadFile); 
+            var filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Resources", uploadFile);
             Project project = new Project.Builder()
                 .SetName("UploadFileTest")
                 .SetCode("Uplo")
