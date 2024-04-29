@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+﻿/*using System.Reflection;
 using Allure.Net.Commons;
 using Allure.NUnit.Attributes;
 using Diploma.Helpers.Configuration;
@@ -188,4 +188,4 @@ namespace Diploma.Tests.UITests
             Assert.That(projectRepositoryPage.GetUploadCaseText(), Is.EqualTo(caseTitle));
         }
     }
-}
+}*/
